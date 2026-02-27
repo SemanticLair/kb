@@ -1,0 +1,296 @@
+"""
+Build script: Scans docs/ folder, reads <title> from each HTML file,
+and generates a beautiful index.html homepage.
+"""
+
+import os
+import re
+from datetime import datetime
+
+DOCS_DIR = "docs"
+
+def get_html_files():
+    """Scan docs/ folder for .html files and extract metadata."""
+    docs = []
+    if not os.path.isdir(DOCS_DIR):
+        return docs
+
+    for fname in sorted(os.listdir(DOCS_DIR)):
+        if not fname.endswith(".html"):
+            continue
+
+        filepath = os.path.join(DOCS_DIR, fname)
+        with open(filepath, "r", encoding="utf-8") as f:
+            content = f.read()
+
+        # Extract <title>
+        title_match = re.search(r"<title>(.*?)</title>", content, re.IGNORECASE)
+        title = title_match.group(1) if title_match else fname.replace(".html", "").replace("-", " ").title()
+
+        # Extract meta description if present
+        desc_match = re.search(r'<meta\s+name="description"\s+content="(.*?)"', content, re.IGNORECASE)
+        desc = desc_match.group(1) if desc_match else ""
+
+        # Extract meta date if present
+        date_match = re.search(r'<meta\s+name="date"\s+content="(.*?)"', content, re.IGNORECASE)
+        date = date_match.group(1) if date_match else ""
+
+        # Extract meta icon if present (emoji or text)
+        icon_match = re.search(r'<meta\s+name="icon"\s+content="(.*?)"', content, re.IGNORECASE)
+        icon = icon_match.group(1) if icon_match else ""
+
+        slug = fname.replace(".html", "")
+
+        docs.append({
+            "title": title,
+            "desc": desc,
+            "date": date,
+            "icon": icon,
+            "slug": slug,
+            "filename": fname,
+        })
+
+    return docs
+
+
+def generate_index(docs):
+    """Generate the index.html homepage."""
+
+    doc_cards = ""
+    for doc in docs:
+        icon_html = f'<div class="doc-icon">{doc["icon"]}</div>' if doc["icon"] else ''
+        date_html = f'<div class="doc-date">{doc["date"]}</div>' if doc["date"] else ''
+        desc_html = f'<div class="doc-desc">{doc["desc"]}</div>' if doc["desc"] else ''
+
+        doc_cards += f"""
+    <a class="doc-card" href="docs/{doc['slug']}">
+      <div class="doc-card-inner">
+        {icon_html}
+        <div class="doc-text">
+          <div class="doc-title">{doc['title']}</div>
+          {desc_html}
+        </div>
+      </div>
+      {date_html}
+    </a>"""
+
+    count = len(docs)
+    count_text = f"{count} document{'s' if count != 1 else ''}" if count > 0 else "No documents yet"
+
+    now = datetime.now().strftime("%B %d, %Y at %H:%M UTC")
+
+    html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DB Docs">
+<title>Dan Ballanco - Docs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {{
+    --bg: #080C10;
+    --bg-gradient: linear-gradient(170deg, #080C10 0%, #0D1520 40%, #0A1018 100%);
+    --surface: #111921;
+    --surface-hover: #162030;
+    --border: #1E2A38;
+    --border-hover: #2A3A4E;
+    --text: #E8EDF4;
+    --text-muted: #6B7D94;
+    --text-dim: #3E4F63;
+    --accent: #5B9DF5;
+    --accent-glow: rgba(91, 157, 245, 0.08);
+    --accent-glow-strong: rgba(91, 157, 245, 0.15);
+  }}
+
+  * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+
+  body {{
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    background: var(--bg-gradient);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }}
+
+  /* Subtle grid texture */
+  body::before {{
+    content: '';
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(91,157,245,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(91,157,245,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }}
+
+  .container {{
+    max-width: 560px; width: 100%;
+    margin: 0 auto; padding: 0 24px;
+    position: relative; z-index: 1;
+  }}
+
+  /* HEADER */
+  header {{
+    padding: 64px 0 20px;
+    text-align: center;
+  }}
+
+  .monogram {{
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 56px; height: 56px;
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700; font-style: italic;
+    color: var(--accent);
+    margin-bottom: 24px;
+    background: var(--surface);
+    box-shadow: 0 0 40px var(--accent-glow);
+  }}
+
+  h1 {{
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; font-weight: 700;
+    color: var(--text); letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }}
+
+  .tagline {{
+    font-size: 14px; font-weight: 400;
+    color: var(--text-muted); letter-spacing: 0.02em;
+  }}
+
+  /* DIVIDER */
+  .divider {{
+    height: 1px; margin: 28px 0 24px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }}
+
+  /* DOC COUNT */
+  .doc-count {{
+    font-size: 11px; font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 16px;
+  }}
+
+  /* DOC CARDS */
+  .doc-card {{
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: background 0.2s, border-color 0.25s, box-shadow 0.25s, transform 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }}
+  .doc-card:hover, .doc-card:active {{
+    background: var(--surface-hover);
+    border-color: var(--border-hover);
+    box-shadow: 0 4px 24px var(--accent-glow);
+    transform: translateY(-1px);
+  }}
+
+  .doc-card-inner {{
+    display: flex; align-items: center; gap: 14px;
+    min-width: 0;
+  }}
+
+  .doc-icon {{
+    font-size: 24px; flex-shrink: 0;
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent-glow-strong);
+    border-radius: 8px;
+  }}
+
+  .doc-text {{ min-width: 0; }}
+
+  .doc-title {{
+    font-weight: 600; font-size: 15px;
+    color: var(--text); margin-bottom: 1px;
+  }}
+
+  .doc-desc {{
+    font-size: 12px; color: var(--text-muted);
+    line-height: 1.4;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    max-width: 320px;
+  }}
+
+  .doc-date {{
+    font-size: 11px; color: var(--text-dim);
+    white-space: nowrap; flex-shrink: 0; margin-left: 12px;
+  }}
+
+  /* EMPTY STATE */
+  .empty {{
+    text-align: center; padding: 48px 20px;
+    color: var(--text-dim); font-size: 14px;
+  }}
+
+  /* FOOTER */
+  footer {{
+    padding: 48px 0 32px; text-align: center;
+  }}
+  footer p {{
+    font-size: 11px; color: var(--text-dim);
+    letter-spacing: 0.02em;
+  }}
+
+  /* GLOW ORB */
+  .glow {{
+    position: fixed; top: -120px; left: 50%;
+    transform: translateX(-50%);
+    width: 500px; height: 320px;
+    background: radial-gradient(ellipse, rgba(91,157,245,0.06) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }}
+</style>
+</head>
+<body>
+
+<div class="glow"></div>
+
+<div class="container">
+  <header>
+    <div class="monogram">DB</div>
+    <h1>Dan Ballanco</h1>
+    <p class="tagline">Personal Knowledge Base</p>
+  </header>
+
+  <div class="divider"></div>
+
+  <div class="doc-count">{count_text}</div>
+{doc_cards if doc_cards else '  <div class="empty">Add HTML files to the docs/ folder to see them here.</div>'}
+
+  <footer>
+    <p>Last built {now}</p>
+  </footer>
+</div>
+
+</body>
+</html>"""
+
+    return html
+
+
+def main():
+    docs = get_html_files()
+    html = generate_index(docs)
+    with open("index.html", "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"Built index.html with {len(docs)} document(s)")
+
+
+if __name__ == "__main__":
+    main()
