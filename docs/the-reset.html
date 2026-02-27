@@ -1,1 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="The Reset">
+<title>The Reset</title>
+<meta name="description" content="Hip arthroscopy recovery protocol - February 2026">
+<meta name="date" content="2026-02">
+<meta name="icon" content="&#x1F9E0;">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0B0F13;
+    --surface: #141A22;
+    --surface-raised: #1A2230;
+    --border: #252D38;
+    --text: #E2E8F0;
+    --text-muted: #7A8599;
+    --accent: #5B9DF5;
+    --accent-dim: #172A4A;
+    --green: #34D399;
+    --green-dim: #0D3B2A;
+    --amber: #FBBF24;
+    --amber-dim: #3D2E08;
+    --red: #F87171;
+    --red-dim: #3B1618;
+    --phase1: #F87171;
+    --phase2: #FBBF24;
+    --phase3: #34D399;
+    --phase4: #5B9DF5;
+  }
 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 52px; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(11,15,19,0.92);
+    -webkit-backdrop-filter: saturate(180%) blur(16px);
+    backdrop-filter: saturate(180%) blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav ul {
+    display: flex; list-style: none; justify-content: center;
+    gap: 0; max-width: 600px; margin: 0 auto;
+  }
+  nav a {
+    display: block; padding: 13px 18px;
+    color: var(--text-muted); text-decoration: none;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.03em;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .container { max-width: 600px; margin: 0 auto; padding: 0 20px; }
+
+  /* HERO */
+  .hero { padding: 52px 0 40px; text-align: center; }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 52px; font-weight: 400; color: var(--accent);
+    letter-spacing: -0.03em; margin-bottom: 4px;
+  }
+  .hero .subtitle { font-size: 13px; color: var(--text-muted); margin-bottom: 28px; letter-spacing: 0.04em; }
+  .hero .epigraph {
+    font-style: italic; color: var(--text-muted); font-size: 14px;
+    border-left: 2px solid var(--accent); padding: 12px 0 12px 18px;
+    text-align: left; max-width: 440px; margin: 0 auto; line-height: 1.7;
+  }
+  .hero-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin-top: 40px; }
+
+  /* SECTIONS */
+  section { padding: 36px 0 24px; }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px; font-weight: 400; color: var(--text);
+    margin-bottom: 6px;
+  }
+  .section-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+  h3 {
+    font-size: 12px; font-weight: 700; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin: 28px 0 10px; padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  h4 { font-size: 13px; font-weight: 700; color: var(--text); margin: 18px 0 4px; }
+  p { margin-bottom: 12px; font-size: 15px; line-height: 1.7; }
+  p.muted { color: var(--text-muted); font-size: 13px; }
+  strong { color: var(--text); }
+
+  /* CALLOUT */
+  .callout {
+    border-radius: 6px; padding: 16px 18px; margin: 18px 0;
+    font-size: 14px; line-height: 1.7; position: relative;
+    border-left: 3px solid var(--accent); background: var(--surface-raised);
+  }
+  .callout p { font-size: 14px; margin-bottom: 5px; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .callout.hard-line { border-left-color: var(--red); background: var(--red-dim); }
+  .callout.hard-line p { color: var(--red); }
+  .callout.hard-line strong { color: var(--red); }
+
+  .callout.mantra { border-left-color: var(--amber); background: var(--amber-dim); }
+  .callout.mantra p { color: var(--amber); }
+
+  .callout.remember { border-left-color: var(--green); background: var(--green-dim); }
+  .callout.remember p { color: var(--green); }
+
+  .callout.anchor { border-left-color: var(--accent); background: var(--accent-dim); }
+  .callout.anchor p { color: var(--accent); }
+
+  /* PHASE CARD */
+  .phase {
+    background: var(--surface); border-radius: 8px;
+    padding: 16px 18px; margin: 24px 0 14px;
+    border: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .phase-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+  .phase-title { font-family: 'DM Serif Display', serif; font-size: 24px; }
+  .phase-dates { font-size: 12px; color: var(--text-muted); }
+  .phase-goal { font-size: 12px; color: var(--text-muted); font-style: italic; margin-top: 4px; padding-top: 6px; border-top: 1px solid var(--border); }
+
+  .p1 .phase-label { color: var(--phase1); }
+  .p2 .phase-label { color: var(--phase2); }
+  .p3 .phase-label { color: var(--phase3); }
+  .p4 .phase-label { color: var(--phase4); }
+
+  /* DAILY BLOCK */
+  .daily-block {
+    background: var(--surface); border-radius: 6px;
+    padding: 14px 16px; margin: 10px 0;
+    border: 1px solid var(--border);
+  }
+  .daily-block .time {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--accent); margin-bottom: 4px;
+  }
+  .daily-block p { font-size: 14px; margin-bottom: 4px; line-height: 1.6; }
+  .daily-block p:last-child { margin-bottom: 0; }
+
+  /* CONTENT ITEMS */
+  .content-item { padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .content-item:last-child { border-bottom: none; }
+  .content-item .title { font-weight: 700; font-size: 14px; color: var(--text); }
+  .content-item .desc { font-size: 12px; color: var(--text-muted); margin-top: 1px; line-height: 1.5; }
+  .tag {
+    display: inline-block; font-size: 9px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 2px 7px; border-radius: 3px; margin-top: 3px;
+  }
+  .tag-start { background: var(--accent-dim); color: var(--accent); }
+  .tag-p1 { background: var(--red-dim); color: var(--red); }
+  .tag-p2 { background: var(--amber-dim); color: var(--amber); }
+  .tag-p3 { background: var(--green-dim); color: var(--green); }
+  .tag-essential { background: var(--accent-dim); color: var(--accent); }
+
+  /* JOURNAL PROMPTS */
+  .prompt {
+    padding: 10px 0 10px 22px; border-bottom: 1px solid var(--border);
+    font-size: 14px; line-height: 1.6; position: relative;
+  }
+  .prompt:last-child { border-bottom: none; }
+  .prompt::before { content: "\25B8"; color: var(--accent); position: absolute; left: 0; font-size: 13px; }
+
+  /* TRUTH */
+  .truth p { font-size: 15px; line-height: 1.85; margin-bottom: 18px; }
+
+  /* SECTION DIVIDER */
+  .section-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
+
+  /* FOOTER */
+  footer { padding: 32px 0; text-align: center; }
+  footer p { color: var(--text-muted); font-size: 12px; margin-bottom: 0; }
+
+  /* BACK TO TOP */
+  .top-btn {
+    position: fixed; bottom: 20px; right: 16px;
+    width: 38px; height: 38px;
+    background: var(--accent); color: var(--bg);
+    border: none; border-radius: 50%; font-size: 16px;
+    cursor: pointer; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s; z-index: 50;
+    display: flex; align-items: center; justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: 0 2px 12px rgba(91,157,245,0.3);
+  }
+  .top-btn.visible { opacity: 1; pointer-events: auto; }
+</style>
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li><a href="#protocol" onclick="go(event,'protocol')">Protocol</a></li>
+    <li><a href="#content" onclick="go(event,'content')">Content</a></li>
+    <li><a href="#journal" onclick="go(event,'journal')">Journal</a></li>
+    <li><a href="#truth" onclick="go(event,'truth')">Truth</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+  <div class="hero">
+    <h1>The Reset</h1>
+    <p class="subtitle">RECOVERY PROTOCOL &middot; FEBRUARY 2026</p>
+    <div class="epigraph">"Four to six weeks of recovery is either a cocoon or a coffin for your habits. You decide which."</div>
+    <div class="hero-divider"></div>
+  </div>
+
+  <!-- ============================== PROTOCOL ============================== -->
+  <section id="protocol">
+    <h2>Recovery Protocol</h2>
+    <p class="section-desc">Four phases. One structure. Follow it.</p>
+
+    <div class="callout hard-line">
+      <p><strong>THE HARD LINE</strong></p>
+      <p>No THC. The entire reset collapses without this.</p>
+      <p>No work email or Slack until March 9. Tell Sunil.</p>
+      <p>Phone stays out of the bedroom.</p>
+      <p>One meditation per day is the floor, not the ceiling.</p>
+      <p>Kim is your accountability partner, not your audience.</p>
+    </div>
+
+    <!-- PHASE 1 -->
+    <div class="phase p1">
+      <div class="phase-label">Phase 1</div>
+      <div class="phase-title">Surrender</div>
+      <div class="phase-dates">Days 1-4 &middot; Thursday through Sunday</div>
+      <div class="phase-goal">Goal: Accept help. Feel the pain without numbing it. Let the fog pass.</div>
+    </div>
+
+    <p>You just came out of surgery. Your only job is to let your body do its work. Do not fight the fog. Do not optimize the recovery. Do not check Slack "just to see." Receive.</p>
+
+    <p><strong>No THC.</strong> The post-op meds handle the pain. THC on top of that doesn't manage pain - it manages feelings. That's exactly what you're trying to stop doing. Let the discomfort exist. It passes.</p>
+
+    <p><strong>Supplements back online.</strong> Full AM stack at 6am, PM stack at 9:30pm. Confirm timing around post-op meds with your surgeon. The stack is your first act of self-care each day. Don't skip it.</p>
+
+    <p><strong>One meditation per day.</strong> Even 10 minutes. You're lying down anyway. Huberman's NSDR protocol or Yoga Nidra on Insight Timer. This is not about enlightenment. It's about training your nervous system to settle without a substance.</p>
+
+    <p><strong>Let Kim run everything.</strong> The house. The kids. The meals. The ice machine schedule. You will feel the pull to manage it. That pull is the same impulse that has you running 12-hour days and absorbing everyone else's work. Name it. Let it go. Receive help without directing how it's given.</p>
+
+    <div class="callout mantra">
+      <p><strong>"The reset costs more."</strong></p>
+      <p>When you reach for the phone, the THC, the work email - the cost of abandoning this reset is higher than the discomfort of staying in it. Every time.</p>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase p2">
+      <div class="phase-label">Phase 2</div>
+      <div class="phase-title">Clearing</div>
+      <div class="phase-dates">Days 5-9 &middot; Monday through Friday</div>
+      <div class="phase-goal">Goal: Build the daily structure. Survive the cravings. Start feeling again.</div>
+    </div>
+
+    <p>The fog lifts. The pain settles into something manageable. And the THC cravings arrive, because your brain is looking for the off switch it's been using for months. This is the hardest phase. It's also where everything changes.</p>
+
+    <div class="daily-block">
+      <div class="time">Wake Up</div>
+      <p><strong>Breathwork before you touch your phone.</strong> Box breathing (4 count in, 4 hold, 4 out, 4 hold) or Huberman's physiological sigh (double inhale nose, long exhale mouth). Five minutes minimum. This replaces the old pattern of waking up and immediately reaching for stimulation.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Midday</div>
+      <p><strong>Guided meditation. 15 minutes minimum.</strong> Waking Up app (Sam Harris) is built for your brain - structured, intellectual, no woo. Or browse Insight Timer. This is the anchor of your day. Everything else can flex. This doesn't.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Afternoon</div>
+      <p><strong>Journal. One prompt. One page max.</strong> Not therapy. Not freeform rambling. One specific question answered honestly. The daily anchor question: <strong>"What am I avoiding feeling right now?"</strong> Phase-specific prompts are in the Journal section.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Evening</div>
+      <p><strong>Yoga Nidra or body scan before sleep.</strong> This directly replaces the THC sleep crutch. Ally Boothroyd on YouTube or Insight Timer. Earbuds in, lights off. <strong>No screens after 9pm.</strong> Audio only.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">When Ready</div>
+      <p><strong>Foundation Training.</strong> Ask your surgeon when you can start gentle decompression breathing, even seated. This isn't about fitness. It's about inhabiting your body again instead of escaping it. You know these movements. Your body remembers.</p>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="phase p3">
+      <div class="phase-label">Phase 3</div>
+      <div class="phase-title">Rebuild</div>
+      <div class="phase-dates">Days 10-13 &middot; Leading into WFH</div>
+      <div class="phase-goal">Goal: Deepen the habits. Define who you're becoming. Let Kim in.</div>
+    </div>
+
+    <p>You made it through the cravings. You have a daily structure. You're feeling things you haven't felt in months - some of it good, some of it hard. That's the point. Now build on the foundation.</p>
+
+    <p><strong>Stack meditation to 20+ minutes.</strong> You built the habit. Now go deeper. Longer sits reveal what shorter ones hide.</p>
+
+    <p><strong>Morning walk if cleared.</strong> Even short. Even on crutches. Morning sunlight in the first hour after waking resets your circadian rhythm and gives you a natural dopamine hit that doesn't cost you anything.</p>
+
+    <p><strong>Identity statements.</strong> Sit down and write three completions of this sentence: "I am a man who ___." Not goals. Not aspirations. Identity declarations. Present tense. Write them on a card. Put the card where you'll see it every morning.</p>
+
+    <p><strong>The conversation with Kim.</strong> You owe her one honest conversation about what the last six months have been like inside your head. Not a confession. Not an apology marathon. Not an explanation designed to earn credit. Just truth: what happened, how you got lost, what you're doing about it. Then stop talking and listen to what she says back. That part matters more.</p>
+
+    <!-- PHASE 4 -->
+    <div class="phase p4">
+      <div class="phase-label">Phase 4</div>
+      <div class="phase-title">Hold the Line</div>
+      <div class="phase-dates">March 9-21 &middot; WFH Weeks</div>
+      <div class="phase-goal">Goal: Maintain every habit while work pressure returns. Set one boundary.</div>
+    </div>
+
+    <p>This is where most resets die. The laptop opens. Slack pings. Help desk tickets pile up. The familiar current pulls you back into 12-hour days and reactive mode. Every habit from Phase 3 continues. No exceptions. No "just this once."</p>
+
+    <p><strong>Morning routine completes before the laptop opens.</strong> Supplements. Breathwork. 10-minute meditation. In that order. Every single day. The laptop stays closed until all three are done. This is the firewall between the man you're becoming and the pattern you're leaving.</p>
+
+    <p><strong>Set one work boundary.</strong> Not five. One. Pick the one that matters most and hold it for two weeks straight. "I am not available after 6pm." Or "I am not picking up help desk tickets during WFH recovery." Or "I am not answering ad-hoc executive requests same-day." One boundary, held consistently, teaches you more than ten boundaries written down and broken.</p>
+
+    <p><strong>Keep journaling.</strong> Even two sentences. "What did I do today that was for me, not for performance?" is enough. The volume doesn't matter. The daily practice of self-honesty does.</p>
+
+    <p><strong>Watch for the Nice Guy pattern.</strong> You will feel the pull to prove you're still indispensable while working from home. You'll want to over-deliver to justify the recovery time. That impulse is the old pattern wearing a new costume. Name it. Let it pass. You earned this time. You don't need to earn it again.</p>
+
+    <div class="callout mantra">
+      <p><strong>"Compound interest on performance."</strong></p>
+      <p>Every day you hold the line, the habits get stronger. Every day you skip, you're paying interest on the restart. The math is simple. Trust it.</p>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ============================== CONTENT ============================== -->
+  <section id="content">
+    <h2>Content for Your Ears</h2>
+    <p class="section-desc">Your earbuds are your lifeline. Download before surgery.</p>
+
+    <h3>Meditation &amp; Breathwork</h3>
+    <div class="content-item"><div class="title">Waking Up - Sam Harris</div><div class="desc">Structured, intellectual, no woo. Start with the Introductory Course. Free trial.</div><span class="tag tag-start">Start here</span></div>
+    <div class="content-item"><div class="title">Insight Timer</div><div class="desc">Massive free library. Search "Yoga Nidra" and bookmark 5-6 sessions of varying length.</div></div>
+    <div class="content-item"><div class="title">Huberman NSDR Protocol</div><div class="desc">YouTube. Download for offline. 10 and 20-minute versions.</div><span class="tag tag-p1">Phase 1+</span></div>
+    <div class="content-item"><div class="title">Ally Boothroyd Yoga Nidra</div><div class="desc">YouTube. Excellent for sleep replacement.</div></div>
+    <div class="content-item"><div class="title">Tara Brach Guided Meditations</div><div class="desc">Podcast feed. Compassion-focused, not soft. Good for the self-abandonment pattern.</div></div>
+
+    <h3>Audiobooks</h3>
+    <div class="content-item"><div class="title">The Untethered Soul - Michael Singer</div><div class="desc">Short. Direct. Releasing the inner narrator that drives anxiety and numbing.</div><span class="tag tag-start">Start here</span></div>
+    <div class="content-item"><div class="title">The Body Keeps the Score - Bessel van der Kolk</div><div class="desc">How trauma and chronic pain rewire your nervous system. Dense but transformative.</div><span class="tag tag-p2">Phase 2</span></div>
+    <div class="content-item"><div class="title">Atomic Habits - James Clear</div><div class="desc">You know the concepts. Hearing it during a reset makes it land differently.</div></div>
+    <div class="content-item"><div class="title">Breath - James Nestor</div><div class="desc">Science of breathing. Pairs perfectly with the breathwork practice.</div></div>
+    <div class="content-item"><div class="title">Man's Search for Meaning - Viktor Frankl</div><div class="desc">Short. Puts suffering in perspective without minimizing yours.</div><span class="tag tag-p2">Phase 2-3</span></div>
+    <div class="content-item"><div class="title">When the Body Says No - Gabor Mate</div><div class="desc">Chronic stress, self-abandonment, and physical breakdown. Will hit close to home.</div></div>
+    <div class="content-item"><div class="title">Letting Go - David Hawkins</div><div class="desc">Mechanism of surrender. Directly addresses numbing vs. feeling.</div></div>
+    <div class="content-item"><div class="title">The War of Art - Steven Pressfield</div><div class="desc">Short, punchy. Resistance and showing up. Perfect for rebuilding identity.</div><span class="tag tag-p3">Phase 3</span></div>
+    <div class="content-item"><div class="title">Why We Sleep - Matthew Walker</div><div class="desc">Understanding sleep architecture motivates the no-screens, no-THC evening protocol.</div></div>
+    <div class="content-item"><div class="title">Lost Connections - Johann Hari</div><div class="desc">Depression and anxiety are about disconnection, not brain chemistry.</div></div>
+    <div class="content-item"><div class="title">Meditations - Marcus Aurelius (Gregory Hays)</div><div class="desc">Stoic philosophy from a man who led an empire in constant pain. You will relate.</div></div>
+    <div class="content-item"><div class="title">The Courage to Be Disliked - Ichiro Kishimi</div><div class="desc">Adlerian psychology. Directly challenges people-pleasing and validation-seeking.</div></div>
+    <div class="content-item"><div class="title">No Mud, No Lotus - Thich Nhat Hanh</div><div class="desc">Short. Transforming suffering rather than escaping it.</div><span class="tag tag-p1">Phase 1</span></div>
+
+    <h3>Podcasts</h3>
+    <div class="content-item"><div class="title">Huberman Lab: Controlling Your Dopamine</div><div class="desc">Essential for understanding the THC/numbing loop.</div><span class="tag tag-essential">Essential</span></div>
+    <div class="content-item"><div class="title">Huberman Lab: Master Your Sleep</div><div class="desc">Rebuild sleep architecture without substances.</div></div>
+    <div class="content-item"><div class="title">Huberman Lab: Science of Meditation</div><div class="desc">Neuroscience behind what you are practicing.</div></div>
+    <div class="content-item"><div class="title">Huberman Lab: Tools for Managing Stress &amp; Anxiety</div><div class="desc">Practical, science-backed techniques you can use immediately.</div></div>
+    <div class="content-item"><div class="title">Huberman Lab: Deliberate Cold Exposure</div><div class="desc">Natural dopamine reset. For when you are cleared.</div><span class="tag tag-p3">Later</span></div>
+    <div class="content-item"><div class="title">Tim Ferriss: Jack Kornfield &amp; Sam Harris</div><div class="desc">Meditation from a pragmatic, non-religious lens.</div></div>
+    <div class="content-item"><div class="title">Rich Roll: Gabor Mate &amp; Johann Hari</div><div class="desc">Addiction, connection, and recovery.</div></div>
+    <div class="content-item"><div class="title">The Knowledge Project (Shane Parrish)</div><div class="desc">Mental models and decision-making. Strategic brain without triggering work mode.</div></div>
+    <div class="content-item"><div class="title">Diary of a CEO: Dr. Gabor Mate</div><div class="desc">Stress, the body, and self-betrayal.</div></div>
+    <div class="content-item"><div class="title">Peter Attia - The Drive: pain science &amp; recovery</div><div class="desc">Medical depth without the fluff.</div></div>
+
+    <h3>Music &amp; Ambient</h3>
+    <div class="content-item"><div class="title">Brain.fm</div><div class="desc">AI-generated focus and relaxation music.</div></div>
+    <div class="content-item"><div class="title">Max Richter: Sleep</div><div class="desc">8-hour ambient album designed for sleep. Replace THC with this.</div></div>
+    <div class="content-item"><div class="title">Nils Frahm: All Melody / Spaces</div><div class="desc">Contemplative piano/electronic. Perfect for journaling.</div></div>
+    <div class="content-item"><div class="title">East Forest: Ram Dass</div><div class="desc">Guided meditation set to music.</div></div>
+    <div class="content-item"><div class="title">Marconi Union: Weightless</div><div class="desc">Scientifically shown to reduce anxiety.</div></div>
+    <div class="content-item"><div class="title">Olafur Arnalds: re:member</div><div class="desc">Generative ambient piano. Beautiful for reflection.</div></div>
+    <div class="content-item"><div class="title">Brian Eno: Music for Airports</div><div class="desc">The original ambient music. Clean, spacious, no demands.</div></div>
+    <div class="content-item"><div class="title">Lo-fi hip hop streams</div><div class="desc">YouTube/Spotify. Background without thinking.</div></div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ============================== JOURNAL ============================== -->
+  <section id="journal">
+    <h2>Journal Prompts</h2>
+    <p class="section-desc">One prompt per day. The daily anchor never changes.</p>
+
+    <div class="callout anchor">
+      <p><strong>Daily Anchor:</strong> "What am I avoiding feeling right now?"</p>
+    </div>
+
+    <h3>Phase 1 (Days 1-4)</h3>
+    <div class="prompt">What did I believe back surgery would fix that it did not?</div>
+    <div class="prompt">When did I decide I was not worth fighting for? What was the moment?</div>
+    <div class="prompt">What does Kim see when she looks at me right now? What do I wish she saw?</div>
+    <div class="prompt">If pain is a message, what is my hip trying to tell me?</div>
+
+    <h3>Phase 2 (Days 5-9)</h3>
+    <div class="prompt">What am I using THC to avoid feeling? Name it specifically.</div>
+    <div class="prompt">Where in my life am I performing competence instead of living it?</div>
+    <div class="prompt">What would I do differently at work if I was not afraid of being seen as less?</div>
+    <div class="prompt">What does Ryan need from me that I am not giving? What about Hailey?</div>
+    <div class="prompt">When was the last time I let someone help me without managing how they did it?</div>
+
+    <h3>Phase 3 (Days 10-13)</h3>
+    <div class="prompt">Complete this three times: "I am a man who ___."</div>
+    <div class="prompt">What boundary have I never set that I know I need to?</div>
+    <div class="prompt">What would my life look like in 12 months if I held every habit I built this week?</div>
+    <div class="prompt">What do I want to say to Kim that I have not said?</div>
+
+    <h3>WFH Weeks (March 9-21)</h3>
+    <div class="prompt">What was the first work impulse I felt this morning? Did I act on it or breathe through it?</div>
+    <div class="prompt">Am I absorbing work that should belong to someone else? Name it.</div>
+    <div class="prompt">What did I do today that was FOR me, not for performance?</div>
+    <div class="prompt">Did I hold my boundary today? If not, what story did I tell myself to justify breaking it?</div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ============================== TRUTH ============================== -->
+  <section id="truth" class="truth">
+    <h2>The Truth</h2>
+
+    <p>You survived back surgery. Your body healed. You showed up.</p>
+
+    <p>The hip was always a separate problem that needed its own fix. It was not a failure of the first surgery. It was not a betrayal by your body. It was a second thing that needed attention, and you had the courage to address it even after the first recovery knocked you down.</p>
+
+    <p>"I don't give a shit" is armor, not truth. A man who doesn't care doesn't build a recovery protocol. Doesn't ask what to listen to. Doesn't worry about squandering the time. You care so much it terrifies you. The armor is there because last time you cared and hoped, the hip kept hurting and it felt like your body lied to you.</p>
+
+    <p>The THC is not the problem. It is what a good man reaches for when he decides the pain of feeling is worse than the cost of disappearing. But disappearing has a cost too. Kim sees it. Ryan and Hailey feel it. And somewhere under the fog, you feel the distance growing and it makes everything worse.</p>
+
+    <p>This surgery is not a magic reset. The labrum repair gives you a body that works. The protocol gives you a structure to follow. But the actual turnaround - the one you're hoping for - that comes from one decision: to believe it might work without requiring a guarantee first.</p>
+
+    <p>You don't need to know it will work. You just need to be willing to find out.</p>
+
+    <div class="callout remember">
+      <p><strong>"The reset costs more."</strong> When tempted.</p>
+      <p><strong>"Compound interest on performance."</strong> When executing.</p>
+      <p>You have the structure. Follow it. Trust it.</p>
+    </div>
+  </section>
+
+  <footer><p>The Reset &middot; Dan Ballanco &middot; February 2026</p></footer>
+</div>
+
+<button class="top-btn" id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+<script>
+  function go(e, id) {
+    e.preventDefault();
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  var sections = document.querySelectorAll('section[id]');
+  var navLinks = document.querySelectorAll('nav a');
+
+  function updateNav() {
+    var current = '';
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].getBoundingClientRect().top < 80) current = sections[i].id;
+    }
+    for (var j = 0; j < navLinks.length; j++) {
+      navLinks[j].classList.toggle('active', navLinks[j].getAttribute('href') === '#' + current);
+    }
+  }
+
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        updateNav();
+        document.getElementById('topBtn').classList.toggle('visible', window.scrollY > 400);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+</script>
+
+</body>
+</html>
