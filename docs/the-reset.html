@@ -209,6 +209,35 @@
 </head>
 <body>
 
+<!-- PASSWORD GATE -->
+<div id="gate" style="position:fixed;top:0;left:0;right:0;bottom:0;background:#0B0F13;z-index:9999;display:flex;align-items:center;justify-content:center;">
+  <div style="text-align:center;padding:24px;">
+    <div style="font-family:'DM Serif Display',serif;font-size:36px;color:#5B9DF5;margin-bottom:24px;">The Reset</div>
+    <input id="pw" type="password" placeholder="Enter password" autocomplete="off" autofocus
+      style="background:#141A22;border:1px solid #252D38;border-radius:8px;padding:14px 18px;font-size:16px;color:#E2E8F0;font-family:'DM Sans',sans-serif;width:220px;text-align:center;outline:none;-webkit-appearance:none;"
+      onkeydown="if(event.key==='Enter')unlock()">
+    <br>
+    <button onclick="unlock()"
+      style="margin-top:12px;background:#5B9DF5;color:#0B0F13;border:none;border-radius:8px;padding:12px 32px;font-size:14px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent;">
+      Enter
+    </button>
+    <div id="gate-err" style="color:#F87171;font-size:13px;margin-top:12px;opacity:0;transition:opacity 0.3s;">Wrong password</div>
+  </div>
+</div>
+<script>
+function unlock(){
+  if(document.getElementById('pw').value==='lfg'){
+    document.getElementById('gate').style.display='none';
+    sessionStorage.setItem('unlocked','1');
+  } else {
+    document.getElementById('gate-err').style.opacity='1';
+    document.getElementById('pw').value='';
+    setTimeout(function(){document.getElementById('gate-err').style.opacity='0';},2000);
+  }
+}
+if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').style.display='none';}
+</script>
+
 <nav>
   <ul>
     <li><a href="#protocol" onclick="go(event,'protocol')">Protocol</a></li>
