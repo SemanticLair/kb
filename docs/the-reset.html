@@ -7,8 +7,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="The Reset">
 <title>The Reset</title>
-<meta name="description" content="Hip arthroscopy recovery protocol - February 2026">
-<meta name="date" content="2026-02">
+<meta name="description" content="Recovery protocol starting March 1, 2026">
+<meta name="date" content="2026-03">
 <meta name="icon" content="&#x1F9E0;">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
@@ -28,10 +28,6 @@
     --amber-dim: #3D2E08;
     --red: #F87171;
     --red-dim: #3B1618;
-    --phase1: #F87171;
-    --phase2: #FBBF24;
-    --phase3: #34D399;
-    --phase4: #5B9DF5;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -39,30 +35,28 @@
 
   body {
     font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-size-adjust: 100%;
+    background: var(--bg); color: var(--text); line-height: 1.65;
+    -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%;
     overflow-x: hidden;
   }
 
-  /* NAV */
   nav {
     position: sticky; top: 0; z-index: 100;
     background: rgba(11,15,19,0.92);
     -webkit-backdrop-filter: saturate(180%) blur(16px);
     backdrop-filter: saturate(180%) blur(16px);
     border-bottom: 1px solid var(--border);
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
   }
   nav ul {
     display: flex; list-style: none; justify-content: center;
-    gap: 0; max-width: 600px; margin: 0 auto;
+    gap: 0; max-width: 640px; margin: 0 auto;
+    min-width: max-content;
   }
   nav a {
-    display: block; padding: 13px 18px;
+    display: block; padding: 13px 9px; white-space: nowrap;
     color: var(--text-muted); text-decoration: none;
-    font-size: 13px; font-weight: 600; letter-spacing: 0.03em;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
     border-bottom: 2px solid transparent;
     transition: color 0.2s, border-color 0.2s;
     -webkit-tap-highlight-color: transparent;
@@ -71,11 +65,10 @@
 
   .container { max-width: 600px; margin: 0 auto; padding: 0 20px; }
 
-  /* HERO */
   .hero { padding: 52px 0 40px; text-align: center; }
   .hero h1 {
     font-family: 'DM Serif Display', serif;
-    font-size: 52px; font-weight: 400; color: var(--accent);
+    font-size: 48px; font-weight: 400; color: var(--accent);
     letter-spacing: -0.03em; margin-bottom: 4px;
   }
   .hero .subtitle { font-size: 13px; color: var(--text-muted); margin-bottom: 28px; letter-spacing: 0.04em; }
@@ -86,13 +79,11 @@
   }
   .hero-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin-top: 40px; }
 
-  /* SECTIONS */
   section { padding: 36px 0 24px; }
 
   h2 {
     font-family: 'DM Serif Display', serif;
-    font-size: 28px; font-weight: 400; color: var(--text);
-    margin-bottom: 6px;
+    font-size: 28px; font-weight: 400; color: var(--text); margin-bottom: 6px;
   }
   .section-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
   h3 {
@@ -101,12 +92,9 @@
     margin: 28px 0 10px; padding-bottom: 6px;
     border-bottom: 1px solid var(--border);
   }
-  h4 { font-size: 13px; font-weight: 700; color: var(--text); margin: 18px 0 4px; }
   p { margin-bottom: 12px; font-size: 15px; line-height: 1.7; }
-  p.muted { color: var(--text-muted); font-size: 13px; }
   strong { color: var(--text); }
 
-  /* CALLOUT */
   .callout {
     border-radius: 6px; padding: 16px 18px; margin: 18px 0;
     font-size: 14px; line-height: 1.7; position: relative;
@@ -114,38 +102,26 @@
   }
   .callout p { font-size: 14px; margin-bottom: 5px; }
   .callout p:last-child { margin-bottom: 0; }
-
   .callout.hard-line { border-left-color: var(--red); background: var(--red-dim); }
   .callout.hard-line p { color: var(--red); }
   .callout.hard-line strong { color: var(--red); }
-
   .callout.mantra { border-left-color: var(--amber); background: var(--amber-dim); }
   .callout.mantra p { color: var(--amber); }
-
   .callout.remember { border-left-color: var(--green); background: var(--green-dim); }
   .callout.remember p { color: var(--green); }
-
   .callout.anchor { border-left-color: var(--accent); background: var(--accent-dim); }
   .callout.anchor p { color: var(--accent); }
 
-  /* PHASE CARD */
-  .phase {
+  .day {
     background: var(--surface); border-radius: 8px;
-    padding: 16px 18px; margin: 24px 0 14px;
+    padding: 16px 18px; margin: 20px 0 12px;
     border: 1px solid var(--border);
-    display: flex; flex-direction: column; gap: 2px;
   }
-  .phase-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
-  .phase-title { font-family: 'DM Serif Display', serif; font-size: 24px; }
-  .phase-dates { font-size: 12px; color: var(--text-muted); }
-  .phase-goal { font-size: 12px; color: var(--text-muted); font-style: italic; margin-top: 4px; padding-top: 6px; border-top: 1px solid var(--border); }
+  .day-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2px; }
+  .day-title { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 2px; }
+  .day-date { font-size: 12px; color: var(--text-muted); }
+  .day-goal { font-size: 12px; color: var(--text-muted); font-style: italic; margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--border); }
 
-  .p1 .phase-label { color: var(--phase1); }
-  .p2 .phase-label { color: var(--phase2); }
-  .p3 .phase-label { color: var(--phase3); }
-  .p4 .phase-label { color: var(--phase4); }
-
-  /* DAILY BLOCK */
   .daily-block {
     background: var(--surface); border-radius: 6px;
     padding: 14px 16px; margin: 10px 0;
@@ -158,7 +134,6 @@
   .daily-block p { font-size: 14px; margin-bottom: 4px; line-height: 1.6; }
   .daily-block p:last-child { margin-bottom: 0; }
 
-  /* CONTENT ITEMS */
   .content-item { padding: 10px 0; border-bottom: 1px solid var(--border); }
   .content-item:last-child { border-bottom: none; }
   .content-item .title { font-weight: 700; font-size: 14px; color: var(--text); }
@@ -168,13 +143,12 @@
     text-transform: uppercase; letter-spacing: 0.05em;
     padding: 2px 7px; border-radius: 3px; margin-top: 3px;
   }
-  .tag-start { background: var(--accent-dim); color: var(--accent); }
+  .tag-p0 { background: var(--surface-raised); color: var(--text-muted); }
   .tag-p1 { background: var(--red-dim); color: var(--red); }
   .tag-p2 { background: var(--amber-dim); color: var(--amber); }
   .tag-p3 { background: var(--green-dim); color: var(--green); }
-  .tag-essential { background: var(--accent-dim); color: var(--accent); }
+  .tag-accent { background: var(--accent-dim); color: var(--accent); }
 
-  /* JOURNAL PROMPTS */
   .prompt {
     padding: 10px 0 10px 22px; border-bottom: 1px solid var(--border);
     font-size: 14px; line-height: 1.6; position: relative;
@@ -182,17 +156,13 @@
   .prompt:last-child { border-bottom: none; }
   .prompt::before { content: "\25B8"; color: var(--accent); position: absolute; left: 0; font-size: 13px; }
 
-  /* TRUTH */
   .truth p { font-size: 15px; line-height: 1.85; margin-bottom: 18px; }
 
-  /* SECTION DIVIDER */
   .section-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
 
-  /* FOOTER */
   footer { padding: 32px 0; text-align: center; }
   footer p { color: var(--text-muted); font-size: 12px; margin-bottom: 0; }
 
-  /* BACK TO TOP */
   .top-btn {
     position: fixed; bottom: 20px; right: 16px;
     width: 38px; height: 38px;
@@ -241,6 +211,10 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
 <nav>
   <ul>
     <li><a href="#protocol" onclick="go(event,'protocol')">Protocol</a></li>
+    <li><a href="#calendar" onclick="go(event,'calendar')">Calendar</a></li>
+    <li><a href="#days" onclick="go(event,'days')">Days</a></li>
+    <li><a href="#rehab" onclick="go(event,'rehab')">Rehab</a></li>
+    <li><a href="#fuel" onclick="go(event,'fuel')">Fuel</a></li>
     <li><a href="#content" onclick="go(event,'content')">Content</a></li>
     <li><a href="#journal" onclick="go(event,'journal')">Journal</a></li>
     <li><a href="#truth" onclick="go(event,'truth')">Truth</a></li>
@@ -251,118 +225,785 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
 
   <div class="hero">
     <h1>The Reset</h1>
-    <p class="subtitle">RECOVERY PROTOCOL &middot; FEBRUARY 2026</p>
-    <div class="epigraph">"Four to six weeks of recovery is either a cocoon or a coffin for your habits. You decide which."</div>
+    <p class="subtitle">STARTS MARCH 1, 2026</p>
+    <div class="epigraph">"You don't have to be ready. You just have to start."<br><span style="font-size:12px;color:var(--text-muted);font-style:normal;">Charging towards 50. Eyes open. This time is real.</span></div>
     <div class="hero-divider"></div>
   </div>
 
   <!-- ============================== PROTOCOL ============================== -->
   <section id="protocol">
-    <h2>Recovery Protocol</h2>
-    <p class="section-desc">Four phases. One structure. Follow it.</p>
+    <h2>The Protocol</h2>
+    <p class="section-desc">The rules. The meds. The non-negotiables. Every element below is backed by published research.</p>
 
     <div class="callout hard-line">
-      <p><strong>THE HARD LINE</strong></p>
-      <p>No THC. The entire reset collapses without this.</p>
-      <p>No work email or Slack until March 9. Tell Sunil.</p>
-      <p>Phone stays out of the bedroom.</p>
-      <p>One meditation per day is the floor, not the ceiling.</p>
-      <p>Kim is your accountability partner, not your audience.</p>
+      <p><strong>THE LINE</strong></p>
+      <p>Clean from March 1. No numbing. No escaping. Feel it or it festers.</p>
+      <p>No work email or Slack until March 9.</p>
+      <p>Phone out of the bedroom.</p>
+      <p>One meditation per day. Floor, not ceiling.</p>
+      <p>Kim knows the plan. Accountability, not audience.</p>
     </div>
 
-    <!-- PHASE 1 -->
-    <div class="phase p1">
-      <div class="phase-label">Phase 1</div>
-      <div class="phase-title">Surrender</div>
-      <div class="phase-dates">Days 1-4 &middot; Thursday through Sunday</div>
-      <div class="phase-goal">Goal: Accept help. Feel the pain without numbing it. Let the fog pass.</div>
+    <div class="callout anchor">
+      <p><strong>GROUNDING TOOLKIT - When Anxiety Spikes or Cravings Hit</strong></p>
+      <p><strong>30 seconds:</strong> Physiological sigh - double inhale through nose, long exhale through mouth. Fastest cortisol drop available.</p>
+      <p><strong>5 minutes:</strong> Huff - Box Breathing (4-4-4-4). Parasympathetic activation. Use before hard conversations, after triggering emails, before sleep.</p>
+      <p><strong>10 minutes:</strong> Huff - Wim Hof (3 rounds). Full nervous system reset. Floods the body with natural adrenaline then deep calm on the breath hold.</p>
+      <p><strong>20 minutes:</strong> NSDR (Huberman protocol). Equivalent to 2 hours of sleep. Use after PT, after stressful work blocks, or when you feel yourself reaching.</p>
+      <p><strong>Any time:</strong> Get near a window or step outside if you can. Natural light helps. Not a dealbreaker - the breathwork and NSDR do the heavy lifting.</p>
     </div>
 
-    <p>You just came out of surgery. Your only job is to let your body do its work. Do not fight the fog. Do not optimize the recovery. Do not check Slack "just to see." Receive.</p>
+    <div class="callout remember">
+      <p><strong>SHAME VS. GUILT - Know the Difference</strong></p>
+      <p><strong>Guilt:</strong> "I did bad things." Guilt is useful. It points at behavior you can change.</p>
+      <p><strong>Shame:</strong> "I am a bad person." Shame is a lie. It locks you in a loop: I'm not worth it, so I self-destruct, which proves I'm not worth it.</p>
+      <p>You are not a bad man. You are a good man who ran bad patterns. Patterns change. Identity doesn't have to be a prison. That's what these 8 days are for.</p>
+      <p><strong>When the shame voice speaks this week, name it:</strong> "That's shame. That's not me."</p>
+    </div>
 
-    <p><strong>No THC.</strong> The post-op meds handle the pain. THC on top of that doesn't manage pain - it manages feelings. That's exactly what you're trying to stop doing. Let the discomfort exist. It passes.</p>
+    <h3>Medications - Dr. Buckley's Orders</h3>
 
-    <p><strong>Supplements back online.</strong> Full AM stack at 6am, PM stack at 9:30pm. Confirm timing around post-op meds with your surgeon. The stack is your first act of self-care each day. Don't skip it.</p>
+    <div class="daily-block">
+      <div class="time">Aspirin 325mg</div>
+      <p>Twice per day with food. 30 days (through March 28). Prevents blood clots. <strong>Take at least 2 hours before Naproxen</strong> - Naproxen can block Aspirin's antiplatelet effect if taken simultaneously.</p>
+    </div>
 
-    <p><strong>One meditation per day.</strong> Even 10 minutes. You're lying down anyway. Huberman's NSDR protocol or Yoga Nidra on Insight Timer. This is not about enlightenment. It's about training your nervous system to settle without a substance.</p>
+    <div class="daily-block">
+      <div class="time">Colace (Docusate Sodium)</div>
+      <p>1 pill morning, 1 pill evening. Prevents constipation from oxycodone and anesthesia. Drink plenty of clear liquids. Keep prune juice on hand. If no bowel movement in 3-4 days, add Milk of Magnesia or Miralax.</p>
+    </div>
 
-    <p><strong>Let Kim run everything.</strong> The house. The kids. The meals. The ice machine schedule. You will feel the pull to manage it. That pull is the same impulse that has you running 12-hour days and absorbing everyone else's work. Name it. Let it go. Receive help without directing how it's given.</p>
+    <div class="daily-block">
+      <div class="time">Tylenol (Acetaminophen) - First Line</div>
+      <p>1,000mg (2 extra-strength tablets) every 6-8 hours as needed. DO NOT exceed 4,000mg in 24 hours.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Oxycodone - AS NEEDED Only</div>
+      <p>Narcotic. Use only when Tylenol isn't enough. Goal: transition off within 2-3 days to Tylenol only. No driving. No alcohol.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Naproxen 500mg</div>
+      <p>Twice per day with food for 10 days (through March 8). Prevents bony overgrowth (heterotopic ossification) and reduces inflammation. If GI upset, stop and increase icing and motion. DO NOT take ibuprofen, Motrin, Advil, Aleve, Celebrex, or Meloxicam while on this.</p>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ============================== CALENDAR ============================== -->
+  <section id="calendar">
+    <h2>Key Dates</h2>
+    <p class="section-desc">Your recovery timeline at a glance.</p>
+
+    <div class="daily-block">
+      <div class="time">February 28 (Saturday) - Day 0</div>
+      <p>Remove surgical bandages. Replace with Tegaderm. Download all apps. Set up recovery station. Prep everything so tomorrow you just execute.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">March 1 (Sunday) - Day 1</div>
+      <p>The Reset begins. Clean from today. First shower. First meditation. Tell Kim.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">March 2 (Monday) - Day 2</div>
+      <p>First PT session. Oasis Physical Therapy, Tinton Falls, NJ. 8:30 AM.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">March 8 (Sunday) - Day 8</div>
+      <p>Last day of Naproxen (10-day course ends). The Conversation with Kim.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">March 9 (Monday) - Day 9</div>
+      <p>WFH begins. Laptop opens. Morning routine completes BEFORE work. Hold your boundary.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">March 13 (Friday) - Post-Op</div>
+      <p>Post-op with Dr. Buckley. Get clearance on weight-bearing, activity. Ask about Foundation Training timeline. <strong>Ask if hip recovery supports hernia surgery target of May 1.</strong> Bring questions written down.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">March 15 (Sunday) - Birthday</div>
+      <p>You turn 49. Two weeks of protocol behind you. Back to the office Monday. That's the gift you give yourself this year.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">March 28 (Saturday)</div>
+      <p>Last day of Aspirin (30-day course ends).</p>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ============================== DAYS ============================== -->
+  <section id="days">
+    <h2>The Days</h2>
+    <p class="section-desc">Day by day. Hour by hour. No ambiguity. Follow the structure.</p>
+
+    <!-- ========== DAY 0 ========== -->
+    <div class="day">
+      <div class="day-label">Day 0</div>
+      <div class="day-title">Prep</div>
+      <div class="day-date">Saturday, February 28</div>
+      <div class="day-goal">Goal: Set up everything. Tomorrow you execute, not prepare.</div>
+    </div>
+
+    <p>You're 2 days post-op. Still foggy. Still sore. That's fine. Today is logistics, not effort. Get your environment ready so tomorrow morning you wake up and the only thing left to do is start.</p>
+
+    <div class="daily-block">
+      <div class="time">Bandages</div>
+      <p><strong>Remove surgical bandages.</strong> Replace with clear waterproof bandages (Tegaderm-style). Check incision sites. No redness, no drainage, no heat. If anything looks off, call Dr. Buckley's office.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Download &amp; Configure Apps</div>
+      <p><strong>Waking Up</strong> (purchased). Open it. Start the Introductory Course. Don't do a session yet - just make sure it works and you know where Session 1 is. This is your daily meditation app.</p>
+      <p><strong>Huff</strong> (breathwork app). Download. This is your daily breathwork app. Test a Wim Hof session and a Box Breathing session. Set it up so tomorrow morning you just press play.</p>
+      <p><strong>Brain.fm</strong> (purchased). Open it. Test Focus mode, Relax mode, and Sleep mode. Pick your preferred Sleep sound for tonight.</p>
+      <p><strong>YouTube downloads for offline:</strong> Huberman NSDR Protocol (10-min and 20-min versions). Save offline so they work without Wi-Fi. For Yoga Nidra, use the Waking Up app - it has Yoga Nidra sessions built in that are higher quality than YouTube options.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Phone Setup</div>
+      <p><strong>Remove work apps from your home screen.</strong> Slack goes in a folder. Email goes in a folder. You're off until March 9. Make it hard to cheat.</p>
+      <p><strong>Set a 30-minute repeating timer.</strong> You cannot sit longer than 30 minutes - PT restriction through March 19. Every time it goes off: stand, shift weight, crutch a lap. Start the habit today.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Recovery Station</div>
+      <p><strong>Set up your spot.</strong> Couch or recliner with: water bottle (full), ice packs accessible, phone charger, earbuds/headphones, journal and pen.</p>
+      <p><strong>Supplements organized.</strong> AM stack lined up: Tyrosine (2), Arg-Cit (4), Lung Health (2), Sigma (4), One A Day (1), Omega-3 (1). PM stack lined up: Theanine (4), Mag Glycinate (4), Multi Collagen (3), Glucosamine (3). Aspirin and Colace next to both.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Groceries</div>
+      <p><strong>Stock the kitchen.</strong> Protein (eggs, chicken, deli meat, protein bars), vegetables (broccoli, frozen backup), fruit, oatmeal, water bottles, prune juice (Dr. Buckley's orders). See Fuel section for eating tips.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Podcast Setup (Overcast)</div>
+      <p><strong>Create 5 playlists:</strong> Morning Anchor, Men's Work, Recovery + Science, Relationship, Professional. Subscribe to all feeds listed in the Content Library under each playlist. Download the must-listen episodes queued for Days 1-8. This takes 15 minutes now and saves you from fumbling later.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Audiobook Queue</div>
+      <p><strong>Queue these on Audible or your audiobook app:</strong> No Mud, No Lotus (Thich Nhat Hanh) for Day 1. The Untethered Soul (Michael Singer) for Day 3. Breath (James Nestor) for Day 5. The War of Art (Steven Pressfield) for Day 7. Atomic Habits (James Clear) for Day 8. Have them downloaded and ready.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Tonight - Test Your Evening Protocol</div>
+      <p>At 9pm, put the phone down. Try Brain.fm Sleep mode or your sleep playlist through earbuds. Tomorrow it's real.</p>
+    </div>
+
+    <!-- ========== DAY 1 ========== -->
+    <div class="day">
+      <div class="day-label">Day 1</div>
+      <div class="day-title">Draw the Line</div>
+      <div class="day-date">Sunday, March 1</div>
+      <div class="day-goal">Goal: Clean starts today. First shower. First meditation. Tell Kim. Tomorrow PT begins.</div>
+    </div>
+
+    <p>Everything is set up from yesterday. Today you stop preparing and start being the man who shows up. You are 48 years old. You are charging towards 50. Not crawling, not limping, not apologizing. Charging. Monday you walk into Oasis PT at 8:30am. Today you get your mind right.</p>
+
+    <div class="daily-block">
+      <div class="time">6:00 AM - Supplements &amp; Meds</div>
+      <p>AM supplements with food. Aspirin 325mg with that same meal. Colace morning dose.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">6:15 AM - Breathwork (10 min) + Meditation (10 min)</div>
+      <p><strong>Before anything else.</strong> Huff app - Wim Hof breathing (3 rounds, ~10 min). Then Waking Up Session #1 (10 min). This is the first morning of the rest of your life. These 20 minutes happen every day from now on. No exceptions.</p>
+      <p style="color:var(--text-muted);font-size:12px;margin-top:4px;"><strong>The science:</strong> Wim Hof breathing increases norepinephrine 200-300% (PNAS 2014), producing natural alertness and anti-inflammatory effects. Meditation reduces amygdala reactivity and increases prefrontal cortex activity - measurable changes begin within days. NSDR increases dopamine by 65% (Huberman Lab). This isn't motivation. This is neurochemistry.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">6:30 AM - Shower</div>
+      <p><strong>First shower since surgery.</strong> Tegaderm bandages went on yesterday. Take your time. If you can get near a window with natural light while having coffee after, do it. Morning light helps reset your circadian clock and boost dopamine. Not a dealbreaker if you can't.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">8:00 AM - Naproxen + Breakfast</div>
+      <p>Naproxen 500mg with food. 2-hour gap from Aspirin maintained.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">10:00 AM - NSDR or Second Meditation</div>
+      <p><strong>10-20 minutes.</strong> Huberman NSDR protocol or a second Waking Up session. You did breathwork this morning. This is the settling layer. Let the nervous system drop.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">11:00 AM - Rest + Content</div>
+      <p><strong>Rest and recover.</strong> Start No Mud, No Lotus (Thich Nhat Hanh). Short audiobook on transforming suffering.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">12:00 PM - Lunch</div>
+      <p>16oz water first. Protein at the meal. See Fuel section for options.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">2:00 PM - Rest + Content Round 2</div>
+      <p>Continue No Mud, No Lotus or switch to Brain.fm Relax mode. Rest position per PT guidance starting Monday.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">4:00 PM - Ryan Time (30 min)</div>
+      <p><strong>Phone in another room.</strong> Not next to you on silent. In another room. Thirty minutes where Ryan has a dad who is fully in the room. Play a game, watch something together, ask him about his day. This is not optional. This is the point. If you can't do 30 minutes without reaching for a screen, that's the data you need.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">6:30 PM - Dinner + Naproxen</div>
+      <p>Vegetables on the plate. Naproxen 500mg with this meal (2+ hours before PM Aspirin at 9:30).</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">8:00 PM - Tell Kim</div>
+      <p>Not a speech. Not an apology. Not a performance designed to earn credit. Just: "I'm starting something. Here's what it looks like. I need you to know." She doesn't need to be impressed. She needs to see you mean it. The shame voice will tell you not to say anything because you'll fail and it'll be worse. That's shame talking. Name it and speak anyway.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">9:00 PM - Screens Off</div>
+      <p>Phone out of the bedroom. Brain.fm Sleep mode or your sleep playlist.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">9:30 PM - PM Supplements + Yoga Nidra</div>
+      <p>Full PM stack with a snack. Aspirin 325mg. Colace evening dose. Yoga Nidra (Waking Up app) with earbuds.</p>
+    </div>
 
     <div class="callout mantra">
       <p><strong>"The reset costs more."</strong></p>
-      <p>When you reach for the phone, the THC, the work email - the cost of abandoning this reset is higher than the discomfort of staying in it. Every time.</p>
+      <p>The cost of abandoning this is always higher than the discomfort of staying in it. Every time you want to numb out, that's the sentence.</p>
     </div>
 
-    <!-- PHASE 2 -->
-    <div class="phase p2">
-      <div class="phase-label">Phase 2</div>
-      <div class="phase-title">Clearing</div>
-      <div class="phase-dates">Days 5-9 &middot; Monday through Friday</div>
-      <div class="phase-goal">Goal: Build the daily structure. Survive the cravings. Start feeling again.</div>
+    <!-- ========== DAY 2 ========== -->
+    <div class="day">
+      <div class="day-label">Day 2</div>
+      <div class="day-title">PT Begins</div>
+      <div class="day-date">Monday, March 2</div>
+      <div class="day-goal">Goal: Show up to PT. Establish the morning routine. Feel the difference between pain and discomfort.</div>
     </div>
 
-    <p>The fog lifts. The pain settles into something manageable. And the THC cravings arrive, because your brain is looking for the off switch it's been using for months. This is the hardest phase. It's also where everything changes.</p>
+    <p>This is the first real day. Your body is going to talk to you in ways you've been muting for months. Let it. Pain is information. Discomfort is growth. Numbing is neither. When the shame voice says "why bother, you'll just quit like always" - that's the old operating system. You're running new software now.</p>
 
     <div class="daily-block">
-      <div class="time">Wake Up</div>
-      <p><strong>Breathwork before you touch your phone.</strong> Box breathing (4 count in, 4 hold, 4 out, 4 hold) or Huberman's physiological sigh (double inhale nose, long exhale mouth). Five minutes minimum. This replaces the old pattern of waking up and immediately reaching for stimulation.</p>
-    </div>
-
-    <div class="daily-block">
-      <div class="time">Midday</div>
-      <p><strong>Guided meditation. 15 minutes minimum.</strong> Waking Up app (Sam Harris) is built for your brain - structured, intellectual, no woo. Or browse Insight Timer. This is the anchor of your day. Everything else can flex. This doesn't.</p>
+      <div class="time">6:00 AM - Supplements + Aspirin + Colace</div>
+      <p>AM supplements with food. Aspirin 325mg. Colace morning dose.</p>
     </div>
 
     <div class="daily-block">
-      <div class="time">Afternoon</div>
-      <p><strong>Journal. One prompt. One page max.</strong> Not therapy. Not freeform rambling. One specific question answered honestly. The daily anchor question: <strong>"What am I avoiding feeling right now?"</strong> Phase-specific prompts are in the Journal section.</p>
+      <div class="time">6:15 AM - Breathwork (10 min) + Meditation (10 min)</div>
+      <p>Before you touch your phone. Huff app - Wim Hof breathing (3 rounds, ~10 min). Then Waking Up meditation (10 min). This 20-minute morning block is the firewall between the old pattern and the new one. Every single day.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">8:00 AM - Naproxen + Snack</div>
+      <p>Naproxen 500mg with food. 2-hour gap from Aspirin.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">8:30 AM - PT Session, Oasis Physical Therapy</div>
+      <p><strong>Be honest with your therapist.</strong> Tell them your actual pain levels, not what you think they want to hear. First session covers: ambulation and stairs with crutches at 20lb FFWB, stationary bike intro, PROM instruction for you AND Kim (she needs to learn the home exercises), isometric baseline, and prone lying guidance.</p>
+      <p><strong>Ask:</strong> When can I start gentle Foundation Training decompression breathing? What should I feel vs. what means stop? Prone lying target - 1-2 or 2-3 hours? Write down the home program details.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">10:00 AM - Post-PT Recovery</div>
+      <p><strong>Ice the hip.</strong> 15-20 min with a towel barrier. <strong>NSDR or Waking Up session</strong> while icing. Your nervous system is activated. This is the perfect time to practice settling it without a substance.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">11:00 AM - Rest + Content</div>
+      <p>Continue No Mud, No Lotus if you didn't finish yesterday. Or Brain.fm Relax mode.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">12:00 PM - Lunch</div>
+      <p>16oz water first. Protein at the meal.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">1:00 PM - Stationary Bike (20 min)</div>
+      <p>Upright, no resistance. Brain.fm Focus mode in earbuds.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">2:00 PM - Isometrics + Prone Lying</div>
+      <p>Quad sets, glut sets, TA activation. Hold 5 seconds, 20 reps each. Then prone lying with audiobook or podcast.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">4:00 PM - Ryan/Hailey Time (30 min)</div>
+      <p><strong>Phone in another room.</strong> Every single day. This is how the tone of your household changes. Not through a conversation. Through repetition. They'll notice before you tell them.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">6:30 PM - Dinner + Naproxen</div>
+      <p>Vegetables. Naproxen 500mg.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">8:00 PM - Journal</div>
+      <p><strong>First journal entry.</strong> One prompt, one page max: <strong>"What did my body tell me today that I've been ignoring?"</strong></p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">8:30 PM - Evening Breathwork (5 min)</div>
+      <p>Huff - Box Breathing (4-4-4-4). Five minutes. This is your parasympathetic on-ramp. Downshifts your nervous system before the screens-off boundary. Different purpose than the morning Wim Hof: morning is activation, evening is settling.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">9:00 PM - Screens Off / 9:30 PM - PM Stack + Yoga Nidra</div>
+      <p>Full PM stack. Aspirin 325mg. Colace. Brain.fm Sleep or your sleep playlist. Yoga Nidra (Waking Up app).</p>
+    </div>
+
+    <!-- ========== DAY 3 ========== -->
+    <div class="day">
+      <div class="day-label">Day 3</div>
+      <div class="day-title">Hold</div>
+      <div class="day-date">Tuesday, March 3</div>
+      <div class="day-goal">Goal: Repeat yesterday's structure. Prove to yourself you can do it twice.</div>
+    </div>
+
+    <p>Day 2 was adrenaline. Day 3 is discipline. The novelty is gone. The cravings will whisper. The structure holds you. Trust it. Neurologically, your dopamine receptors begin upregulating within 48-72 hours of sobriety. That means today your brain is starting to recalibrate. It doesn't feel like progress. It is.</p>
+
+    <div class="daily-block">
+      <div class="time">6:00 AM - Supplements + Aspirin + Colace</div>
+      <p>Same as yesterday. Same time. Every day.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">6:15 AM - Breathwork (10 min) + Meditation (10 min)</div>
+      <p>No phone first. Huff - Wim Hof (3 rounds). Then Waking Up Session #2 (10 min). Same block, every morning.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">7:00 AM - PT Home Exercises</div>
+      <p>Passive ROM (20 min, Kim assists). Isometrics (quad sets, glut sets, TA). Brain.fm Focus in earbuds.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">8:00 AM - Naproxen + Breakfast</div>
+      <p>Naproxen 500mg. Protein breakfast. 16oz water first.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">9:00 AM - Stationary Bike (20 min)</div>
+      <p>Upright, no resistance. Brain.fm Focus.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">10:00 AM - Ice + Prone Lying + Content</div>
+      <p>Ice hip 15-20 min. <strong>Start audiobook:</strong> The Untethered Soul (Michael Singer). Releasing the inner narrator that drives anxiety and numbing.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">12:00 PM - Lunch</div>
+      <p>16oz water first. Protein.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">2:00 PM - Exercises Round 2 + Prone Lying</div>
+      <p>Isometrics round 2. Then prone lying with The Untethered Soul.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">4:00 PM - Kids Time (30 min)</div>
+      <p><strong>Phone in another room.</strong> Be in the room with Ryan or Hailey. No agenda. No lesson. Just be there.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">6:30 PM - Dinner + Naproxen</div>
+      <p>Vegetables. Naproxen 500mg.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">8:00 PM - Journal</div>
+      <p><strong>"What am I avoiding feeling right now?"</strong> This is the daily anchor question. You'll use it every day from here. Some days the answer is obvious. Some days it's "nothing" and that's a lie worth sitting with.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">8:30 PM - Evening Breathwork (5 min)</div>
+      <p>Huff - Box Breathing. Settle the nervous system before screens-off.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">9:00 PM - Screens Off / 9:30 PM - PM Stack + Yoga Nidra</div>
+      <p>Same protocol. Every night.</p>
+    </div>
+
+    <!-- ========== DAY 4 ========== -->
+    <div class="day">
+      <div class="day-label">Day 4</div>
+      <div class="day-title">Deepen</div>
+      <div class="day-date">Wednesday, March 4</div>
+      <div class="day-goal">Goal: Understand the dopamine loop. Name the cravings when they come.</div>
+    </div>
+
+    <p>Three days clean. The hardest cravings hit around now. Your brain is recalibrating. It's going to offer you every justification for going back. "Just once." "You earned it." "It's not that bad." Recognize those as the pattern talking, not you. And underneath the cravings, notice the shame: "You don't deserve to feel good." That's the real voice to catch. Name it. "That's shame. That's not me."</p>
+
+    <div class="daily-block">
+      <div class="time">6:00 AM - Supplements + Aspirin + Colace</div>
+      <p>Same routine. No decisions.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">6:15 AM - Breathwork (10 min) + Meditation (10 min)</div>
+      <p>Huff - Wim Hof (3 rounds). Waking Up Session #3 or #4 (10 min). The morning block is locked in. Same every day.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">7:00 AM - PT Home Exercises</div>
+      <p>Full routine. Passive ROM + isometrics. Brain.fm Focus.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">8:00 AM - Naproxen + Breakfast</div>
+      <p>Same protocol.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">9:00 AM - Stationary Bike (20 min)</div>
+      <p>Upright, no resistance.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">10:00 AM - Ice + Prone Lying + Content</div>
+      <p>Ice hip 15-20 min. <strong>Listen:</strong> Huberman Lab "Controlling Your Dopamine." This will explain, in clinical detail, why the numbing loop works the way it does and what's happening in your brain right now. Knowledge is armor.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">12:00 PM - Lunch</div>
+      <p>16oz water first. Protein.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">2:00 PM - Exercises Round 2 + Prone Lying</div>
+      <p>Isometrics round 2. Continue The Untethered Soul during prone lying.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">6:30 PM - Dinner + Naproxen</div>
+      <p>Vegetables. Naproxen 500mg.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">8:00 PM - Journal</div>
+      <p><strong>"Where in my life am I performing competence instead of living it?"</strong></p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">8:30 PM - Evening Breathwork (5 min)</div>
+      <p>Huff - Box Breathing. Settle the nervous system before screens-off.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">9:00 PM - Screens Off / 9:30 PM - PM Stack + Yoga Nidra</div>
+      <p>Same protocol. Every night.</p>
+    </div>
+
+    <!-- ========== DAY 5 ========== -->
+    <div class="day">
+      <div class="day-label">Day 5</div>
+      <div class="day-title">PT Round 2</div>
+      <div class="day-date">Thursday, March 5</div>
+      <div class="day-goal">Goal: Second PT session. Notice what changed since Monday. Stay present.</div>
+    </div>
+
+    <p>Second PT session. You have a baseline from Monday. Pay attention to what changed in 3 days. Your body is responding to the work even when your brain doubts it.</p>
+
+    <div class="daily-block">
+      <div class="time">6:00 AM - Supplements + Aspirin + Colace</div>
+      <p>Same routine.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">6:15 AM - Breathwork (10 min) + Meditation (10 min)</div>
+      <p>Huff - Wim Hof (3 rounds). Waking Up (10 min). Same morning block, even on PT days.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">8:00 AM - Naproxen + Snack</div>
+      <p>2-hour gap from Aspirin.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">8:30 AM - PT Session, Oasis</div>
+      <p><strong>Follow up on Foundation Training.</strong> If PT gave you guidance Monday, try the decompression breathing today and report back how it felt. If they said not yet, ask again - when specifically?</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">10:00 AM - Post-PT Recovery</div>
+      <p>Ice the hip (15-20 min, towel barrier). NSDR or Waking Up meditation while icing.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">11:00 AM - Rest + Content</div>
+      <p><strong>Start:</strong> Breath (James Nestor). Science of breathing pairs perfectly with what you're learning in PT.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">12:00 PM - Lunch / 1:00 PM - Stationary Bike (20 min)</div>
+      <p>Same structure as every day.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">2:00 PM - Exercises Round 2 + Prone Lying</div>
+      <p>Continue Breath or The Untethered Soul.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">4:00 PM - Kids Time (30 min)</div>
+      <p><strong>Phone in another room.</strong> Be in the room with Ryan or Hailey. No agenda. Just be there.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">6:30 PM - Dinner + Naproxen</div>
+      <p>Vegetables. Naproxen 500mg.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">8:00 PM - Journal</div>
+      <p><strong>"What does Ryan need from me that I'm not giving? What about Hailey?"</strong> This one is going to sting. Let it. And then write this: <strong>"What kind of father do I want them to remember?"</strong> Not what you do for them. Who you are in the room with them. That's the man you're building this week.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">9:00 PM - Screens Off / 9:30 PM - PM Stack + Yoga Nidra</div>
+      <p>Huff - Box Breathing before bed. Queue for tomorrow: Huberman Lab "Master Your Sleep."</p>
+    </div>
+
+    <!-- ========== DAY 6 ========== -->
+    <div class="day">
+      <div class="day-label">Day 6</div>
+      <div class="day-title">Survive the Weekend</div>
+      <div class="day-date">Friday, March 6</div>
+      <div class="day-goal">Goal: Get through Friday night without falling back. Weekends are where resets die.</div>
+    </div>
+
+    <p>Friday night. The old pattern knows this moment. The couch, the kids in bed, Kim doing her thing, the quiet house. That's when the pull is strongest. You know it. So we plan for it. The shame voice will say: "See? Five days and you still want it. You haven't changed." Wrong. Five days and you're sitting with the craving instead of obeying it. That IS the change.</p>
+
+    <div class="daily-block">
+      <div class="time">6:00 AM - Supplements + Aspirin + Colace</div>
+      <p>Same routine. No decisions.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">6:15 AM - Breathwork (10 min) + Meditation (10 min)</div>
+      <p>Huff - Wim Hof (3 rounds). Waking Up (10 min). Friday. You need every minute of this today.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">7:00 AM - PT Home Exercises</div>
+      <p>Full routine. Passive ROM + isometrics. Brain.fm Focus.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">8:00 AM - Naproxen + Breakfast</div>
+      <p>Same protocol.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">9:00 AM - Stationary Bike (20 min)</div>
+      <p>Upright, no resistance.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">10:00 AM - Ice + Prone Lying + Content</div>
+      <p>Ice hip 15-20 min. <strong>Listen:</strong> Huberman Lab "Master Your Sleep." Rebuild sleep architecture naturally. This sets up tonight.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">12:00 PM - Lunch / 2:00 PM - Exercises Round 2 + Prone Lying</div>
+      <p>Continue Breath (Nestor) or Huberman sleep episode.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">4:00 PM - Kids Time (30 min)</div>
+      <p><strong>Phone in another room.</strong> Be in the room with Ryan or Hailey. No agenda. Just be there.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">6:30 PM - Dinner + Naproxen</div>
+      <p>Vegetables. Naproxen 500mg. Family dinner. Be present.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">8:00 PM - The Friday Night Plan</div>
+      <p><strong>Journal:</strong> <strong>"When did I decide I was a bad person? Was it one moment or a thousand small ones? And is it true - or is it a story I built to explain pain I didn't know how to hold?"</strong> If you can get through Friday night, you can get through anything. This is the crucible. The shame wants you to believe the story is who you are. It's not. It's something that happened to you that you internalized.</p>
+      <p><strong>After journal:</strong> Brain.fm Sleep or your relax playlist. Start Yoga Nidra early tonight.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">9:00 PM - Screens Off / 9:30 PM - PM Stack + Yoga Nidra</div>
+      <p>Same protocol. You're almost through.</p>
+    </div>
+
+    <div class="callout mantra">
+      <p><strong>"The reset costs more."</strong></p>
+      <p>Six days. You've already paid the hard part. Walking it back now means paying it all over again. The math doesn't work. Stay.</p>
+    </div>
+
+    <!-- ========== DAY 7 ========== -->
+    <div class="day">
+      <div class="day-label">Day 7</div>
+      <div class="day-title">One Week</div>
+      <div class="day-date">Saturday, March 7</div>
+      <div class="day-goal">Goal: Celebrate one week. Start thinking about identity, not just habits.</div>
+    </div>
+
+    <p>One week clean. One week of structure. One week of showing up. That's not nothing. That's a man who the shame voice said wasn't worth it - and who showed up seven days in a row anyway. The evidence is in. You are not the story. You are the man who held the line for a week. Sit with that for a minute before you move on.</p>
+
+    <div class="daily-block">
+      <div class="time">6:00 AM - Supplements + Aspirin + Colace</div>
+      <p>Seven days in a row.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">6:15 AM - Breathwork (10 min) + Meditation (10 min)</div>
+      <p>Huff - Wim Hof (3 rounds). Waking Up (10 min). Seven mornings in a row.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">7:00 AM - Morning Movement</div>
+      <p><strong>If PT clears it, try a short crutch walk.</strong> Around the house counts. Gentle movement + no phone. When spring hits and you're more mobile, take this outside for natural light.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">8:00 AM - Naproxen + Breakfast</div>
+      <p>Same protocol. Tomorrow is the last day of Naproxen.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">9:00 AM - PT Home Exercises + Stationary Bike</div>
+      <p>Full routine. Passive ROM, isometrics, 20-min bike. Brain.fm Focus.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">10:30 AM - Identity Work</div>
+      <p><strong>Write three completions of: "I am a man who ___."</strong> Not goals. Not aspirations. Identity. Present tense. Who are you becoming? Write them on a card. Put the card where you'll see it every morning.</p>
+      <p>Then write one more: <strong>"I am not ___."</strong> Name the shame story you're leaving behind. Write it down. Look at it. Then put the identity card on top of it. That's the order now.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">11:00 AM - Ice + Prone Lying + Content</div>
+      <p>Ice hip 15-20 min. <strong>Start:</strong> The War of Art (Steven Pressfield). Short, punchy. Resistance and showing up. Perfect for the identity work you're doing today.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">12:00 PM - Lunch / 2:00 PM - Exercises Round 2 + Prone Lying</div>
+      <p>Continue The War of Art.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">4:00 PM - Kids Time (30 min)</div>
+      <p><strong>Phone in another room.</strong> Be in the room with Ryan or Hailey. No agenda. Just be there.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">6:30 PM - Dinner + Naproxen</div>
+      <p>Vegetables. Naproxen 500mg.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">8:00 PM - Journal</div>
+      <p><strong>"What would my life look like in 12 months if I held every habit I built this week?"</strong></p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">9:00 PM - Screens Off / 9:30 PM - PM Stack + Yoga Nidra</div>
+      <p>One week down.</p>
+    </div>
+
+    <!-- ========== DAY 8 ========== -->
+    <div class="day">
+      <div class="day-label">Day 8</div>
+      <div class="day-title">The Conversation</div>
+      <div class="day-date">Sunday, March 8</div>
+      <div class="day-goal">Goal: Have one honest conversation with Kim. Prepare for work returning.</div>
+    </div>
+
+    <p>Tomorrow the laptop opens. Before it does, you owe Kim one honest conversation about what the last six months have been like inside your head. Not a confession designed to earn credit. Not an apology marathon. Not the shame spiral performing remorse. Just truth: what happened, how you checked out, what you're doing about it. Then close your mouth and listen to what she says back. That part matters more.</p>
+    <p>You've held every habit for seven days. You've sat with cravings and didn't act. You've journaled truths you've never written down. You walked into that conversation as a man with a week of evidence that he can change. That's not nothing. That's leverage.</p>
+
+    <p><strong>Last day of Naproxen.</strong> Same morning/evening routine. Aspirin continues through March 28.</p>
+
+    <div class="daily-block">
+      <div class="time">Morning Routine</div>
+      <p><strong>6:00</strong> Supplements + Aspirin. <strong>6:15</strong> Huff - Wim Hof (3 rounds) + Waking Up (10 min). <strong>7:00</strong> Movement (crutch walk if cleared). <strong>8:00</strong> Naproxen (final morning dose) + breakfast. <strong>9:00</strong> PT exercises + bike. Read your identity statements.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Midday - Talk to Kim</div>
+      <p>No performance. No script. Just be in the room and be honest. If the words don't come perfectly, that's fine. Showing up imperfectly beats performing perfectly.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Afternoon - Content</div>
+      <p><strong>Start:</strong> Atomic Habits (James Clear). You know the concepts. Hearing it while holding habits for a week makes it land differently.</p>
+
     </div>
 
     <div class="daily-block">
       <div class="time">Evening</div>
-      <p><strong>Yoga Nidra or body scan before sleep.</strong> This directly replaces the THC sleep crutch. Ally Boothroyd on YouTube or Insight Timer. Earbuds in, lights off. <strong>No screens after 9pm.</strong> Audio only.</p>
+      <p><strong>Prep for WFH.</strong> Set auto-reply. Set Slack status. Decide on your one work boundary.</p>
+      <p><strong>Journal:</strong> <strong>"What boundary have I never set that I know I need to?"</strong></p>
+      <p><strong>6:30</strong> Dinner + final Naproxen dose. <strong>9:00</strong> Screens off. <strong>9:30</strong> PM stack + Yoga Nidra.</p>
+    </div>
+
+    <!-- ========== DAYS 9-21 ========== -->
+    <div class="day">
+      <div class="day-label">Days 9-21</div>
+      <div class="day-title">Hold the Line</div>
+      <div class="day-date">March 9-21 - WFH Weeks</div>
+      <div class="day-goal">Goal: Maintain every habit while work pressure returns. Set one boundary. Hold it.</div>
+    </div>
+
+    <p>This is where most resets die. The laptop opens. Slack pings. Help desk tickets pile up. Sunil needs something. Sam has a question. The familiar current pulls you back into 12-hour days and reactive mode.</p>
+
+    <p>Every habit from the last 8 days continues. No exceptions. No "just this once." No "I'll meditate tomorrow." The compound interest only works if you don't withdraw.</p>
+
+    <p><strong>March 13 (Friday):</strong> Post-op with Dr. Buckley. Get clearance on weight-bearing, activity. Ask about Foundation Training. Ask if May 1 hernia surgery is realistic given hip recovery. Bring your questions written down.</p>
+
+    <p><strong>March 15 (Sunday):</strong> Your birthday. You turn 49. Two weeks of protocol behind you. That's the gift you give yourself this year - not a thing, not a dinner, but proof that you can hold a commitment to yourself for 14 consecutive days. Back to the office Monday.</p>
+
+    <div class="daily-block">
+      <div class="time">Every Morning (Before the Laptop Opens)</div>
+      <p><strong>6:00</strong> AM supplements + Aspirin (Naproxen is done). <strong>6:15</strong> Huff - Wim Hof (3 rounds) + Waking Up (10 min). <strong>6:30</strong> PT exercises + bike. <strong>7:30</strong> Breakfast with protein. The laptop stays closed until all four steps are done. This is the firewall.</p>
     </div>
 
     <div class="daily-block">
-      <div class="time">When Ready</div>
-      <p><strong>Foundation Training.</strong> Ask your surgeon when you can start gentle decompression breathing, even seated. This isn't about fitness. It's about inhabiting your body again instead of escaping it. You know these movements. Your body remembers.</p>
+      <div class="time">Work Hours - The 30-Minute Rule</div>
+      <p><strong>You cannot sit for more than 30 minutes at a time.</strong> This is a PT restriction through March 19, not a suggestion. Set a phone timer. Every 30 minutes: stand, shift weight, do a lap on crutches for a few minutes. This applies to laptop work, meetings, everything.</p>
+      <p><strong>Set one boundary. Hold it for two weeks.</strong> "I am not available after 6pm." Or "No help desk tickets during WFH recovery." Or "No same-day ad-hoc executive requests." Pick the one that matters most. Tell Sunil. Hold it.</p>
     </div>
 
-    <!-- PHASE 3 -->
-    <div class="phase p3">
-      <div class="phase-label">Phase 3</div>
-      <div class="phase-title">Rebuild</div>
-      <div class="phase-dates">Days 10-13 &middot; Leading into WFH</div>
-      <div class="phase-goal">Goal: Deepen the habits. Define who you're becoming. Let Kim in.</div>
+    <div class="daily-block">
+      <div class="time">Content (Days 9-14)</div>
+      <p><strong>Day 9:</strong> Huberman Lab "Science of Meditation." Neuroscience behind what you've been practicing.</p>
+      <p><strong>Day 10:</strong> Daring Greatly (Brown). Shame vs. guilt. The "I am bad" story ends here.</p>
+      <p><strong>Day 11:</strong> The Body Keeps the Score (van der Kolk). Dense but transformative.</p>
+      <p><strong>Day 12:</strong> Huberman Lab "Tools for Managing Stress &amp; Anxiety." Practical techniques as work returns.</p>
+      <p><strong>Weekend:</strong> Tara Brach guided meditations (podcast). Diary of a CEO: Gabor Mate episode.</p>
     </div>
 
-    <p>You made it through the cravings. You have a daily structure. You're feeling things you haven't felt in months - some of it good, some of it hard. That's the point. Now build on the foundation.</p>
-
-    <p><strong>Stack meditation to 20+ minutes.</strong> You built the habit. Now go deeper. Longer sits reveal what shorter ones hide.</p>
-
-    <p><strong>Morning walk if cleared.</strong> Even short. Even on crutches. Morning sunlight in the first hour after waking resets your circadian rhythm and gives you a natural dopamine hit that doesn't cost you anything.</p>
-
-    <p><strong>Identity statements.</strong> Sit down and write three completions of this sentence: "I am a man who ___." Not goals. Not aspirations. Identity declarations. Present tense. Write them on a card. Put the card where you'll see it every morning.</p>
-
-    <p><strong>The conversation with Kim.</strong> You owe her one honest conversation about what the last six months have been like inside your head. Not a confession. Not an apology marathon. Not an explanation designed to earn credit. Just truth: what happened, how you got lost, what you're doing about it. Then stop talking and listen to what she says back. That part matters more.</p>
-
-    <!-- PHASE 4 -->
-    <div class="phase p4">
-      <div class="phase-label">Phase 4</div>
-      <div class="phase-title">Hold the Line</div>
-      <div class="phase-dates">March 9-21 &middot; WFH Weeks</div>
-      <div class="phase-goal">Goal: Maintain every habit while work pressure returns. Set one boundary.</div>
+    <div class="daily-block">
+      <div class="time">Content (Days 15-21)</div>
+      <p><strong>Rotate through:</strong> When the Body Says No (Mate), The Courage to Be Disliked (Kishimi), Letting Go (Hawkins), Meditations (Marcus Aurelius, Hays translation).</p>
+      <p><strong>Podcasts:</strong> Rich Roll with Gabor Mate. Tim Ferriss with Sam Harris on meditation. ManTalks: Shadow Work for Dads. Rotate through your playlists: Morning Anchor (daily), Men's Work and Recovery + Science for prone lying, Professional for light WFH listening. Good Inside (Dr. Becky) before Kids Time.</p>
+      <p><strong>Later (when PT clears):</strong> Huberman Lab "Deliberate Cold Exposure."</p>
     </div>
 
-    <p>This is where most resets die. The laptop opens. Slack pings. Help desk tickets pile up. The familiar current pulls you back into 12-hour days and reactive mode. Every habit from Phase 3 continues. No exceptions. No "just this once."</p>
-
-    <p><strong>Morning routine completes before the laptop opens.</strong> Supplements. Breathwork. 10-minute meditation. In that order. Every single day. The laptop stays closed until all three are done. This is the firewall between the man you're becoming and the pattern you're leaving.</p>
-
-    <p><strong>Set one work boundary.</strong> Not five. One. Pick the one that matters most and hold it for two weeks straight. "I am not available after 6pm." Or "I am not picking up help desk tickets during WFH recovery." Or "I am not answering ad-hoc executive requests same-day." One boundary, held consistently, teaches you more than ten boundaries written down and broken.</p>
-
-    <p><strong>Keep journaling.</strong> Even two sentences. "What did I do today that was for me, not for performance?" is enough. The volume doesn't matter. The daily practice of self-honesty does.</p>
-
-    <p><strong>Watch for the Nice Guy pattern.</strong> You will feel the pull to prove you're still indispensable while working from home. You'll want to over-deliver to justify the recovery time. That impulse is the old pattern wearing a new costume. Name it. Let it pass. You earned this time. You don't need to earn it again.</p>
+    <div class="daily-block">
+      <div class="time">Every Evening</div>
+      <p><strong>6:30</strong> Dinner with vegetables. <strong>8:00</strong> Journal - even two sentences. The daily anchor: "What am I avoiding feeling right now?" Or: "Did I hold my boundary today? If not, what story did I tell myself to justify breaking it?" <strong>9:00</strong> Screens off. <strong>9:30</strong> PM stack + Aspirin + Yoga Nidra.</p>
+      <p><strong>4:00 PM - Kids Time.</strong> Laptop closed, phone in another room. Thirty minutes with Ryan or Hailey. Eight days of this and they'll expect it. That's the point. You're training them to expect your presence, which means you can't take it back without them noticing. Build the cage that keeps you in the room.</p>
+      <p><strong>8:30 PM - Huff Box Breathing.</strong> Five minutes. Downshift before screens-off. This is the evening bookend to your morning Wim Hof.</p>
+      <p><strong>Watch for the Nice Guy pattern.</strong> You will feel the pull to over-deliver from home to justify the recovery time. That impulse is the old pattern wearing a new costume. You earned this time. You don't need to earn it again.</p>
+    </div>
 
     <div class="callout mantra">
       <p><strong>"Compound interest on performance."</strong></p>
@@ -372,54 +1013,223 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
 
   <div class="section-divider"></div>
 
+  <!-- ============================== REHAB ============================== -->
+  <section id="rehab">
+    <h2>Rehab</h2>
+    <p class="section-desc">Dr. Buckley's PT protocol. Surgery: 2/26/26. Right hip. Phase 1 only - weeks 1-6.</p>
+
+    <div class="callout hard-line">
+      <p><strong>RESTRICTIONS - First 3 Weeks (Through March 19)</strong></p>
+      <p>20 lbs foot-flat weight bearing (FFWB) with crutches. Week 4: progress to 50%.</p>
+      <p>90 degrees flexion max. Zero extension. 30 degrees abduction max.</p>
+      <p>20 degrees IR at 90 degrees flexion. 30 degrees ER at 90 degrees flexion.</p>
+      <p>No sitting over 30 minutes at a time.</p>
+      <p>No active lifting of surgical leg for 3-4 weeks.</p>
+      <p>Maintain these restrictions. Don't be a hero.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Daily Home Program</div>
+      <p><strong>Passive ROM:</strong> 20 minutes/day. Circumduction, abduction, flexion, log rolls. Kim assists - she'll be instructed at your first PT visit.</p>
+      <p><strong>Isometrics:</strong> Quad sets, glut sets, TA activation. Hold 5 seconds, 20 reps each, 2x/day.</p>
+      <p><strong>Stationary bike:</strong> 20 minutes daily, upright, NO resistance.</p>
+      <p><strong>Prone lying (face down):</strong> 2-3 hours/day per Day 1 checklist (Phase 1 home program says 1-2 hours). Confirm with PT on Monday which target applies. Prevents hip flexor tightness. Listen to audiobooks and podcasts here.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">PT Sessions (2x/Week at Oasis)</div>
+      <p>Manual therapy: 20 min/session. Soft tissue mobilization on TFL, IT band, outer leg. Scar tissue mobilization.</p>
+      <p>Passive ROM: circumduction in neutral, flexion to 90, abduction to 30, log rolls.</p>
+      <p>Isometrics: quads, adductors, glutes, TA.</p>
+      <p>Prone hip ER/IR, hamstring curls, clams, reverse clams.</p>
+      <p>Core: standing shoulder extension, alternating scapation with core and gluteal isometric activation.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Icing</div>
+      <p><strong>Ice the hip after PT sessions and after home exercises.</strong> 15-20 minutes with a barrier (towel between ice and skin). If you stop Naproxen early due to GI upset, Dr. Buckley's instructions are to increase icing and motion to compensate. Keep ice packs or bags of frozen peas accessible at your recovery station.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Phase 1 Goals</div>
+      <p>Protect the hip joint. Avoid joint and muscular irritation.</p>
+      <p>Symmetric range of motion by weeks 6-8.</p>
+      <p><strong>Progress to Phase 2 when:</strong> non-compensatory gait, no assistive devices, closed chain exercises tolerated, minimal pain, near normal ROM.</p>
+    </div>
+
+    <div class="callout mantra">
+      <p><strong>Common Pitfalls</strong></p>
+      <p>Prolonged soft tissue inflammation. Hip flexor tendonitis. SI joint and lower back pain.</p>
+      <p>Do NOT push past fatigue. Expect ROM limitations initially. This is a 6-week phase for a reason.</p>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ============================== FUEL ============================== -->
+  <section id="fuel">
+    <h2>Fuel</h2>
+    <p class="section-desc">Feed the recovery. Not the boredom. Not the stress.</p>
+
+    <div class="callout hard-line">
+      <p><strong>THE RULES</strong></p>
+      <p>Protein at every meal. Vegetables at dinner 5-7 nights. 16oz water before every meal.</p>
+      <p>This is not a diet. Your body is rebuilding tissue.</p>
+    </div>
+
+    <h3>Eating Tips</h3>
+
+    <div class="daily-block">
+      <div class="time">Protein First</div>
+      <p>You're rebuilding tissue from surgery. Calorie needs are lower (you're not moving much). Protein needs are HIGHER. Target 20-30g protein at breakfast, 25-35g at lunch. Palm-sized, 1 inch thick at dinner. Hit protein before you think about anything else on the plate.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Vegetables Every Night</div>
+      <p><strong>This is the one change that fixes the most problems.</strong> Fiber delays gastric emptying, prevents the blood sugar crash, kills the 10pm cravings, and supports blood pressure. Air fryer broccoli (12-15 min at 400), microwave frozen vegetables (5 min), or raw cucumbers and tomatoes (2 min). Three methods. No excuses. Pick one.</p>
+      <p><strong>Plate rule:</strong> Half vegetables. Quarter protein. Quarter starch. One fist of starch, not two.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Water</div>
+      <p><strong>16oz before each meal + 16oz between meals = ~80oz/day.</strong> Keep a full bottle next to your recovery spot at all times. Hydration directly affects tissue healing, joint recovery, and blood pressure regulation.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">The 9pm Problem</div>
+      <p>Carb-heavy dinner without fiber = blood sugar spike at 7pm, crash at 9pm, hungry at 10pm. Vegetables at dinner fix this mechanically. If still hungry after 9pm: 16oz water, wait 15 min. Still hungry? Protein or fat, not carbs. If this happens every night, you didn't eat enough vegetables at dinner.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Boredom Eating</div>
+      <p>You're home all day recovering. Boredom mimics hunger. Before you open the fridge: <strong>"Am I hungry or am I bored?"</strong> Protein or apple sounds good = hungry. Eat. Chips or something indulgent = bored. Audiobook. Meditation. Anything but the kitchen.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Sodium - Blood Pressure</div>
+      <p><strong>Watch the salt.</strong> Canned soups, deli meats, and processed foods are sodium bombs. Your blood pressure is already spiking. High sodium + Naproxen (which retains fluid) is a bad combination. Read labels. Aim under 2,000mg sodium per day. When the Naproxen course ends March 8, one BP aggravator goes away automatically.</p>
+    </div>
+
+    <div class="callout remember">
+      <p><strong>The appetite fix is not willpower. It's fiber.</strong></p>
+      <p>Vegetables at dinner. Water before meals. Protein at every meal. Do these three things and the 10pm cravings solve themselves.</p>
+    </div>
+
+    <h3>Supplements</h3>
+
+    <div class="daily-block">
+      <div class="time">6:00 AM - With Food</div>
+      <p>Tyrosine (2) / Arg-Cit (4) / Lung Health (2) / Sigma (4) / One A Day (1) / Omega-3 (1)</p>
+      <p style="color:var(--amber);font-size:12px;margin-top:4px;"><strong>TIMING:</strong> Take Aspirin 325mg with this meal at 6am. Take Naproxen 500mg 2+ hours later (~8am, with a snack). Naproxen can block Aspirin's anticlotting effect if taken together. Separate by at least 2 hours. Confirm this timing with Dr. Buckley's office.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">9:30 PM - With Food</div>
+      <p>Theanine (4) / Mag Glycinate (4) / Multi Collagen (3) / Glucosamine (3)</p>
+      <p style="color:var(--text-muted);font-size:12px;margin-top:4px;">Full PM stack. Take evening Aspirin with this meal. Evening Naproxen 2+ hours before or after (e.g., Aspirin at 9:30pm, Naproxen with dinner at 7pm).</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">Blood Pressure Notes</div>
+      <p><strong>Three of your supplements actively support lower BP:</strong> Arg-Cit (vasodilation via nitric oxide, ~5/3 mmHg reduction), Mag Glycinate (natural calcium channel blocker, ~2-6/2-3 mmHg), and Omega-3 (mild BP reduction). These are working FOR you. Keep taking them.</p>
+      <p><strong>Naproxen works AGAINST you on BP.</strong> NSAIDs cause sodium and fluid retention and can raise BP by 5-6 mmHg. This is temporary - Naproxen ends March 8. Monitor your BP and expect improvement after it stops.</p>
+      <p><strong>If you end up on BP medication:</strong> flag the Arg-Cit with your doctor. Combined with BP meds it could push too low. At current supplemental dose this is low risk, but worth mentioning.</p>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
   <!-- ============================== CONTENT ============================== -->
+
   <section id="content">
-    <h2>Content for Your Ears</h2>
-    <p class="section-desc">Your earbuds are your lifeline. Download before surgery.</p>
+    <h2>Content Library</h2>
+    <p class="section-desc">Your apps, courses, audiobooks, and podcasts. Organized by when to start. Apps in bold are your daily drivers.</p>
 
-    <h3>Meditation &amp; Breathwork</h3>
-    <div class="content-item"><div class="title">Waking Up - Sam Harris</div><div class="desc">Structured, intellectual, no woo. Start with the Introductory Course. Free trial.</div><span class="tag tag-start">Start here</span></div>
-    <div class="content-item"><div class="title">Insight Timer</div><div class="desc">Massive free library. Search "Yoga Nidra" and bookmark 5-6 sessions of varying length.</div></div>
-    <div class="content-item"><div class="title">Huberman NSDR Protocol</div><div class="desc">YouTube. Download for offline. 10 and 20-minute versions.</div><span class="tag tag-p1">Phase 1+</span></div>
-    <div class="content-item"><div class="title">Ally Boothroyd Yoga Nidra</div><div class="desc">YouTube. Excellent for sleep replacement.</div></div>
-    <div class="content-item"><div class="title">Tara Brach Guided Meditations</div><div class="desc">Podcast feed. Compassion-focused, not soft. Good for the self-abandonment pattern.</div></div>
+    <h3>Apps (All Days)</h3>
+    <div class="content-item"><div class="title">Waking Up - Sam Harris</div><div class="desc">Daily meditation. Introductory Course first, then Daily Meditations. Structured, intellectual, no woo.</div><span class="tag tag-p0">Day 0</span></div>
+    <div class="content-item"><div class="title">Huff - Breathwork</div><div class="desc">Daily Wim Hof breathing (3 rounds, ~10 min) + Box Breathing for evening wind-down. Your 6:15 AM app.</div><span class="tag tag-p0">Day 0</span></div>
+    <div class="content-item"><div class="title">Brain.fm</div><div class="desc">Focus mode for PT exercises and work. Sleep mode at night. The background layer.</div><span class="tag tag-p0">Day 0</span></div>
+    <div class="content-item"><div class="title">Audible</div><div class="desc">All audiobooks below. Download for offline. Your rest and prone-lying content.</div><span class="tag tag-p0">Day 0</span></div>
+    <div class="content-item"><div class="title">Overcast</div><div class="desc">All podcasts below. Download episodes for offline. Queue by day.</div><span class="tag tag-p0">Day 0</span></div>
+    <div class="content-item"><div class="title">Infuse</div><div class="desc">Downloaded course videos. Huberman NSDR and course content (Youngblood, Beaton).</div><span class="tag tag-p0">Day 0</span></div>
 
-    <h3>Audiobooks</h3>
-    <div class="content-item"><div class="title">The Untethered Soul - Michael Singer</div><div class="desc">Short. Direct. Releasing the inner narrator that drives anxiety and numbing.</div><span class="tag tag-start">Start here</span></div>
-    <div class="content-item"><div class="title">The Body Keeps the Score - Bessel van der Kolk</div><div class="desc">How trauma and chronic pain rewire your nervous system. Dense but transformative.</div><span class="tag tag-p2">Phase 2</span></div>
-    <div class="content-item"><div class="title">Atomic Habits - James Clear</div><div class="desc">You know the concepts. Hearing it during a reset makes it land differently.</div></div>
-    <div class="content-item"><div class="title">Breath - James Nestor</div><div class="desc">Science of breathing. Pairs perfectly with the breathwork practice.</div></div>
-    <div class="content-item"><div class="title">Man's Search for Meaning - Viktor Frankl</div><div class="desc">Short. Puts suffering in perspective without minimizing yours.</div><span class="tag tag-p2">Phase 2-3</span></div>
-    <div class="content-item"><div class="title">When the Body Says No - Gabor Mate</div><div class="desc">Chronic stress, self-abandonment, and physical breakdown. Will hit close to home.</div></div>
-    <div class="content-item"><div class="title">Letting Go - David Hawkins</div><div class="desc">Mechanism of surrender. Directly addresses numbing vs. feeling.</div></div>
-    <div class="content-item"><div class="title">The War of Art - Steven Pressfield</div><div class="desc">Short, punchy. Resistance and showing up. Perfect for rebuilding identity.</div><span class="tag tag-p3">Phase 3</span></div>
-    <div class="content-item"><div class="title">Why We Sleep - Matthew Walker</div><div class="desc">Understanding sleep architecture motivates the no-screens, no-THC evening protocol.</div></div>
-    <div class="content-item"><div class="title">Lost Connections - Johann Hari</div><div class="desc">Depression and anxiety are about disconnection, not brain chemistry.</div></div>
-    <div class="content-item"><div class="title">Meditations - Marcus Aurelius (Gregory Hays)</div><div class="desc">Stoic philosophy from a man who led an empire in constant pain. You will relate.</div></div>
-    <div class="content-item"><div class="title">The Courage to Be Disliked - Ichiro Kishimi</div><div class="desc">Adlerian psychology. Directly challenges people-pleasing and validation-seeking.</div></div>
-    <div class="content-item"><div class="title">No Mud, No Lotus - Thich Nhat Hanh</div><div class="desc">Short. Transforming suffering rather than escaping it.</div><span class="tag tag-p1">Phase 1</span></div>
+    <h3>Courses (Week 2+)</h3>
+    <p style="color:var(--text-muted);font-size:13px;margin-bottom:12px;">You've read NMMNG twice and done most of KTNG. That foundation is solid. These courses build on it.</p>
 
-    <h3>Podcasts</h3>
-    <div class="content-item"><div class="title">Huberman Lab: Controlling Your Dopamine</div><div class="desc">Essential for understanding the THC/numbing loop.</div><span class="tag tag-essential">Essential</span></div>
-    <div class="content-item"><div class="title">Huberman Lab: Master Your Sleep</div><div class="desc">Rebuild sleep architecture without substances.</div></div>
-    <div class="content-item"><div class="title">Huberman Lab: Science of Meditation</div><div class="desc">Neuroscience behind what you are practicing.</div></div>
-    <div class="content-item"><div class="title">Huberman Lab: Tools for Managing Stress &amp; Anxiety</div><div class="desc">Practical, science-backed techniques you can use immediately.</div></div>
-    <div class="content-item"><div class="title">Huberman Lab: Deliberate Cold Exposure</div><div class="desc">Natural dopamine reset. For when you are cleared.</div><span class="tag tag-p3">Later</span></div>
-    <div class="content-item"><div class="title">Tim Ferriss: Jack Kornfield &amp; Sam Harris</div><div class="desc">Meditation from a pragmatic, non-religious lens.</div></div>
-    <div class="content-item"><div class="title">Rich Roll: Gabor Mate &amp; Johann Hari</div><div class="desc">Addiction, connection, and recovery.</div></div>
-    <div class="content-item"><div class="title">The Knowledge Project (Shane Parrish)</div><div class="desc">Mental models and decision-making. Strategic brain without triggering work mode.</div></div>
-    <div class="content-item"><div class="title">Diary of a CEO: Dr. Gabor Mate</div><div class="desc">Stress, the body, and self-betrayal.</div></div>
-    <div class="content-item"><div class="title">Peter Attia - The Drive: pain science &amp; recovery</div><div class="desc">Medical depth without the fluff.</div></div>
+    <div class="content-item"><div class="title">GS Youngblood - Art of Embodiment for Men</div><div class="desc"><strong>START HERE (Day 9).</strong> Nervous system regulation through body-based practice. ANI framework: breathwork, grounding, sensation. You already know the Masculine Blueprint from MIR. This is how you embody it instead of just understanding it. 35+ instructional videos. Do alongside the book.</div><span class="tag tag-p3">Day 9</span></div>
+    <div class="content-item"><div class="title">Connor Beaton - Shadow Work Course</div><div class="desc"><strong>WHEN READY (Week 4+).</strong> 8-week deep dive into the parts of yourself you've been hiding. Jungian shadow integration: the performer, the fixer, the man who lies to his family about workload. Powerful but heavy. Don't start until you have 3+ weeks of daily embodiment practice under you. The shadow work will be more productive with a regulated nervous system.</div><span class="tag tag-accent">Week 4+</span></div>
 
-    <h3>Music &amp; Ambient</h3>
-    <div class="content-item"><div class="title">Brain.fm</div><div class="desc">AI-generated focus and relaxation music.</div></div>
-    <div class="content-item"><div class="title">Max Richter: Sleep</div><div class="desc">8-hour ambient album designed for sleep. Replace THC with this.</div></div>
-    <div class="content-item"><div class="title">Nils Frahm: All Melody / Spaces</div><div class="desc">Contemplative piano/electronic. Perfect for journaling.</div></div>
-    <div class="content-item"><div class="title">East Forest: Ram Dass</div><div class="desc">Guided meditation set to music.</div></div>
-    <div class="content-item"><div class="title">Marconi Union: Weightless</div><div class="desc">Scientifically shown to reduce anxiety.</div></div>
-    <div class="content-item"><div class="title">Olafur Arnalds: re:member</div><div class="desc">Generative ambient piano. Beautiful for reflection.</div></div>
-    <div class="content-item"><div class="title">Brian Eno: Music for Airports</div><div class="desc">The original ambient music. Clean, spacious, no demands.</div></div>
-    <div class="content-item"><div class="title">Lo-fi hip hop streams</div><div class="desc">YouTube/Spotify. Background without thinking.</div></div>
+    <h3>Audiobooks - Week 1 (Audible)</h3>
+    <div class="content-item"><div class="title">No Mud, No Lotus - Thich Nhat Hanh</div><div class="desc">Short. Transforming suffering rather than escaping it. Your first day of recovery listening.</div><span class="tag tag-p1">Day 1</span></div>
+    <div class="content-item"><div class="title">The Untethered Soul - Michael Singer</div><div class="desc">The inner narrator that drives anxiety and numbing. Why you can't think your way out of a feeling problem.</div><span class="tag tag-p1">Day 3</span></div>
+    <div class="content-item"><div class="title">Breath - James Nestor</div><div class="desc">Science of breathing. Deepens your understanding of the Wim Hof practice you're building.</div><span class="tag tag-p2">Day 5</span></div>
+    <div class="content-item"><div class="title">The War of Art - Steven Pressfield</div><div class="desc">Short, punchy. Resistance and showing up. The internal saboteur that tells you to quit.</div><span class="tag tag-p3">Day 7</span></div>
+    <div class="content-item"><div class="title">Atomic Habits - James Clear</div><div class="desc">You know the concepts. Hearing it while holding habits for a week hits different.</div><span class="tag tag-p3">Day 8</span></div>
+
+    <h3>Audiobooks - Week 2-3 (Audible)</h3>
+    <div class="content-item"><div class="title">Daring Greatly - Brené Brown</div><div class="desc">The shame researcher. This book draws the line between shame ("I am bad") and guilt ("I did something bad"). That distinction is the key to your entire reset. You've been running the shame story for years. Brown names it clinically and gives you the framework to dismantle it. Not soft. Research-backed. Essential.</div><span class="tag tag-p1">Day 10</span></div>
+    <div class="content-item"><div class="title">When the Body Says No - Gabor Mate</div><div class="desc">Chronic stress, self-abandonment, and physical breakdown. Your hip, your burnout, your BP spikes. This book is about you.</div><span class="tag tag-p3">Day 11</span></div>
+    <div class="content-item"><div class="title">The Body Keeps the Score - Bessel van der Kolk</div><div class="desc">How trauma and chronic stress rewire the nervous system. Dense but transformative. Take it slow.</div><span class="tag tag-p3">Day 13</span></div>
+    <div class="content-item"><div class="title">The Courage to Be Disliked - Ichiro Kishimi</div><div class="desc">Adlerian psychology. Directly challenges people-pleasing and the need for approval. Will make you uncomfortable.</div><span class="tag tag-accent">Day 15</span></div>
+    <div class="content-item"><div class="title">Letting Go - David Hawkins</div><div class="desc">Mechanism of surrender. Numbing vs. feeling. The internal permission to stop holding everything.</div><span class="tag tag-accent">Week 3</span></div>
+    <div class="content-item"><div class="title">Meditations - Marcus Aurelius (Hays translation)</div><div class="desc">Stoic philosophy from a man who led an empire in constant pain. Read during the WFH grind.</div><span class="tag tag-accent">Week 3</span></div>
+
+    <h3>Podcasts - Overcast Playlists</h3>
+    <p style="color:var(--text-muted);font-size:13px;margin-bottom:12px;">Create these 4 playlists in Overcast. Add the feeds listed under each. Cut OpenAI, ENN, and Bill Maher during the Reset - comfort content and outrage are not growth. You can add them back later.</p>
+
+    <div class="callout">
+      <p><strong>PLAYLIST 1: MORNING ANCHOR</strong> (Daily, 5-15 min)</p>
+      <p>Queue one episode from this playlist every morning during light therapy + coffee.</p>
+    </div>
+    <div class="content-item"><div class="title">The Daily Stoic - Ryan Holiday</div><div class="desc">You already pay for Premium. Short daily episode. Pairs with Meditations (Aurelius) in your audiobook queue. This is your morning primer before the day hits.</div><span class="tag tag-p0">Keep</span></div>
+    <div class="content-item"><div class="title">Good Inside with Dr. Becky Kennedy</div><div class="desc"><strong>NEW - Subscribe.</strong> Parenting for imperfect humans. She talks about rupture and repair - how to come back after you've checked out. Ryan is 10 and Hailey is 14. You don't need to be perfect. You need to be there and know how to repair when you weren't. This podcast will change how you show up at 4pm Kids Time. Short episodes, 15-30 min.</div><span class="tag tag-p1">Add Now</span></div>
+
+    <div class="callout">
+      <p><strong>PLAYLIST 2: MEN'S WORK</strong> (Deep personal development, 30-90 min)</p>
+      <p>For prone lying, PT recovery, and the longer blocks. The real work.</p>
+    </div>
+    <div class="content-item"><div class="title">ManTalks - Connor Beaton</div><div class="desc">Pipeline to your shadow course. Masculine identity, fatherhood, relationships. Connor gets it.</div><span class="tag tag-p0">Keep</span></div>
+    <div class="content-item"><div class="title">Order of Man - Ryan Michler</div><div class="desc">Practical masculine leadership. Short episodes, direct delivery. Matches your communication style.</div><span class="tag tag-p0">Keep</span></div>
+    <div class="content-item"><div class="title">The Dad Edge - Larry Hagner</div><div class="desc">Fatherhood-specific. You need this lens right now more than you think. Being a great engineer means nothing if Ryan remembers a closed door.</div><span class="tag tag-p0">Keep</span></div>
+    <div class="content-item"><div class="title">Rich Roll Podcast</div><div class="desc"><strong>NEW - Subscribe.</strong> Long-form transformation conversations. Gabor Mate and Johann Hari episodes are queued below. Rich Roll rebuilt his life at 40 after addiction. His story will resonate.</div><span class="tag tag-p1">Add Now</span></div>
+    <div class="content-item"><div class="title">The One You Feed - Eric Zimmer</div><div class="desc"><strong>NEW - Subscribe.</strong> Named after the two wolves parable. Every episode is about which patterns you feed. Covers addiction, mindfulness, habit change, emotional regulation. This is your protocol in podcast form. 45-60 min episodes.</div><span class="tag tag-p1">Add Now</span></div>
+    <div class="content-item"><div class="title">Jocko Podcast - Jocko Willink</div><div class="desc"><strong>NEW - Subscribe.</strong> Discipline, accountability, ownership. No excuses, no self-pity, no hedging. Jocko's delivery matches your wiring - direct, no-nonsense, action-first. "Discipline equals freedom" is the mantra your mornings are built on. Long episodes - cherry-pick.</div><span class="tag tag-p1">Add Now</span></div>
+
+    <div class="callout">
+      <p><strong>PLAYLIST 3: RECOVERY + SCIENCE</strong> (Health, nervous system, 60-120 min)</p>
+      <p>For icing, bike, and the science behind what you're doing. Knowledge as armor.</p>
+    </div>
+    <div class="content-item"><div class="title">Huberman Lab - Andrew Huberman</div><div class="desc"><strong>NEW - Subscribe.</strong> Neuroscience protocols for sleep, dopamine, stress, focus. Specific episodes queued below. Long (2+ hours) but you can split across sessions.</div><span class="tag tag-p1">Add Now</span></div>
+    <div class="content-item"><div class="title">Peter Attia - The Drive</div><div class="desc"><strong>NEW - Subscribe.</strong> Deep medical content without the fluff. Longevity, pain science, sleep architecture, metabolic health. Data-driven like you. Pain science episode queued below. His sleep series alone is worth the subscription.</div><span class="tag tag-p1">Add Now</span></div>
+    <div class="content-item"><div class="title">Tara Brach</div><div class="desc">Compassion and self-abandonment. Counterbalances the "perform harder" wiring. Use on the harder days when the inner critic is loud. Keep in this playlist AND queue for evenings.</div><span class="tag tag-p0">Keep</span></div>
+    <div class="content-item"><div class="title">Ten Percent Happier - Dan Harris</div><div class="desc"><strong>NEW - Subscribe.</strong> Meditation for skeptics. Dan Harris had a panic attack on live TV and rebuilt his life through meditation. Another pragmatic voice alongside Sam Harris. Good interviews with teachers you'll recognize from Waking Up.</div><span class="tag tag-p1">Add Now</span></div>
+
+    <div class="callout">
+      <p><strong>PLAYLIST 4: PROFESSIONAL</strong> (Light career development, 30-40 min)</p>
+      <p>Week 2+ only. Do not touch this playlist before Day 9. Your brain will want to. That's avoidance.</p>
+    </div>
+    <div class="content-item"><div class="title">The Knowledge Project - Shane Parrish</div><div class="desc"><strong>NEW - Subscribe.</strong> Mental models, decision-making, strategic thinking. This feeds your career growth without triggering work anxiety. The exact skill set you need for principal-to-leadership transition.</div><span class="tag tag-p3">Day 9</span></div>
+    <div class="content-item"><div class="title">Practical AI (Changelog)</div><div class="desc"><strong>NEW - Subscribe.</strong> AI/ML for enterprise practitioners. Real BI integration use cases, not Silicon Valley hype. 30-40 min. Keeps you current on AI in your field without the noise.</div><span class="tag tag-accent">Week 2</span></div>
+    <div class="content-item"><div class="title">Analytics Power Hour</div><div class="desc"><strong>NEW - Subscribe.</strong> Power BI and analytics focused. Practical, current, no panic. Your stack, your world.</div><span class="tag tag-accent">Week 2</span></div>
+    <div class="content-item"><div class="title">Data Engineering Podcast</div><div class="desc"><strong>NEW - Subscribe.</strong> Modern data stack, architecture patterns, warehouse design. Light professional development. Week 3 at the earliest.</div><span class="tag tag-accent">Week 3</span></div>
+
+    <h3>Must-Listen Episodes (Download These)</h3>
+    <p style="color:var(--text-muted);font-size:13px;margin-bottom:12px;">Specific episodes queued by day. Download for offline. These go in their respective playlists.</p>
+
+    <div class="content-item"><div class="title">Huberman Lab: Controlling Your Dopamine</div><div class="desc">Essential. The numbing loop explained clinically. Knowledge is armor. Listen on Day 4.</div><span class="tag tag-p2">Day 4</span></div>
+    <div class="content-item"><div class="title">Huberman Lab: Master Your Sleep</div><div class="desc">Rebuild sleep architecture naturally. Listen before the Friday crucible.</div><span class="tag tag-p2">Day 6</span></div>
+    <div class="content-item"><div class="title">Huberman Lab: Science of Meditation</div><div class="desc">Neuroscience behind what you've been practicing. Listen after a week of daily sits.</div><span class="tag tag-p3">Day 9</span></div>
+    <div class="content-item"><div class="title">Huberman Lab: Tools for Managing Stress &amp; Anxiety</div><div class="desc">Practical techniques as work pressure returns.</div><span class="tag tag-p3">Day 12</span></div>
+    <div class="content-item"><div class="title">Diary of a CEO: Dr. Gabor Mate</div><div class="desc">Stress, the body, and self-betrayal. Mate will describe your life to you without knowing your name.</div><span class="tag tag-p3">Week 2</span></div>
+    <div class="content-item"><div class="title">Rich Roll: Gabor Mate on Addiction &amp; Connection</div><div class="desc">Addiction as disconnection from self, not substance dependency. Long, deep, essential.</div><span class="tag tag-accent">Week 2</span></div>
+    <div class="content-item"><div class="title">ManTalks Podcast: Connor Beaton on Shadow Work for Dads</div><div class="desc">Preview of the shadow course. Fatherhood, reactivity, and what your kids absorb from your avoidance.</div><span class="tag tag-accent">Week 3</span></div>
+    <div class="content-item"><div class="title">Tim Ferriss: Sam Harris on Meditation</div><div class="desc">Meditation from a pragmatic, non-religious lens. Good for the skeptic in you.</div><span class="tag tag-accent">Week 3</span></div>
+    <div class="content-item"><div class="title">Peter Attia - The Drive: Pain Science</div><div class="desc">Medical depth without the fluff. Relevant to your hip, your body, your recovery.</div><span class="tag tag-accent">Week 3</span></div>
+    <div class="content-item"><div class="title">Huberman Lab: Deliberate Cold Exposure</div><div class="desc">Natural dopamine reset. Queue this for when PT clears you.</div><span class="tag tag-accent">Later</span></div>
+
+    <h3>Video (Infuse - Downloaded)</h3>
+    <div class="content-item"><div class="title">Huberman NSDR Protocol (10 &amp; 20 min)</div><div class="desc">Non-sleep deep rest. Use after PT sessions while icing. Download both lengths.</div><span class="tag tag-p0">Day 0</span></div>
+    <div class="content-item"><div class="title">Yoga Nidra (Waking Up App)</div><div class="desc">Evening sleep protocol. Waking Up has Yoga Nidra sessions that are properly produced. Use these instead of YouTube. Your 9:30 PM wind-down.</div><span class="tag tag-p0">Day 0</span></div>
+    <div class="content-item"><div class="title">Tara Brach Guided Meditations</div><div class="desc">Compassion-focused. Good for the self-abandonment pattern. Rotate with Waking Up on harder days.</div><span class="tag tag-p3">Week 2</span></div>
   </section>
 
   <div class="section-divider"></div>
@@ -433,23 +1243,21 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
       <p><strong>Daily Anchor:</strong> "What am I avoiding feeling right now?"</p>
     </div>
 
-    <h3>Phase 1 (Days 1-4)</h3>
-    <div class="prompt">What did I believe back surgery would fix that it did not?</div>
-    <div class="prompt">When did I decide I was not worth fighting for? What was the moment?</div>
+    <h3>Days 1-3 (March 1-3)</h3>
+    <div class="prompt">What did my body tell me today that I've been ignoring?</div>
+    <div class="prompt">When the shame voice spoke today, what did it say? Write the exact words.</div>
     <div class="prompt">What does Kim see when she looks at me right now? What do I wish she saw?</div>
-    <div class="prompt">If pain is a message, what is my hip trying to tell me?</div>
 
-    <h3>Phase 2 (Days 5-9)</h3>
-    <div class="prompt">What am I using THC to avoid feeling? Name it specifically.</div>
+    <h3>Days 4-6 (March 4-6)</h3>
     <div class="prompt">Where in my life am I performing competence instead of living it?</div>
-    <div class="prompt">What would I do differently at work if I was not afraid of being seen as less?</div>
-    <div class="prompt">What does Ryan need from me that I am not giving? What about Hailey?</div>
-    <div class="prompt">When was the last time I let someone help me without managing how they did it?</div>
+    <div class="prompt">What does Ryan need from me that I'm not giving? What about Hailey?</div>
+    <div class="prompt">If I stopped proving my worth at work tomorrow, who would I be?</div>
 
-    <h3>Phase 3 (Days 10-13)</h3>
-    <div class="prompt">Complete this three times: "I am a man who ___."</div>
-    <div class="prompt">What boundary have I never set that I know I need to?</div>
+    <h3>Days 7-8 (March 7-8)</h3>
     <div class="prompt">What would my life look like in 12 months if I held every habit I built this week?</div>
+    <div class="prompt">What boundary have I never set that I know I need to?</div>
+    <div class="prompt">Complete this three times: "I am a man who ___." Then: "I am not ___."</div>
+    <div class="prompt">"The shame story I'm leaving behind is ___. The evidence against it is ___."</div>
     <div class="prompt">What do I want to say to Kim that I have not said?</div>
 
     <h3>WFH Weeks (March 9-21)</h3>
@@ -457,34 +1265,47 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
     <div class="prompt">Am I absorbing work that should belong to someone else? Name it.</div>
     <div class="prompt">What did I do today that was FOR me, not for performance?</div>
     <div class="prompt">Did I hold my boundary today? If not, what story did I tell myself to justify breaking it?</div>
+    <div class="prompt">When was the last time I let someone help me without managing how they did it?</div>
   </section>
 
   <div class="section-divider"></div>
 
   <!-- ============================== TRUTH ============================== -->
+
   <section id="truth" class="truth">
     <h2>The Truth</h2>
 
-    <p>You survived back surgery. Your body healed. You showed up.</p>
+    <p>Dan. Read this when you want to quit.</p>
 
-    <p>The hip was always a separate problem that needed its own fix. It was not a failure of the first surgery. It was not a betrayal by your body. It was a second thing that needed attention, and you had the courage to address it even after the first recovery knocked you down.</p>
+    <p>You are 48 years old. You have a wife who has watched you disappear into a screen for months. You have a daughter and a son who are growing up right now, today, while you sit in a dark room optimizing queries nobody asked you to optimize at 11pm on a Saturday. You told Kim the workload would get better. You lied. You told yourself it was temporary. You lied about that too.</p>
 
-    <p>"I don't give a shit" is armor, not truth. A man who doesn't care doesn't build a recovery protocol. Doesn't ask what to listen to. Doesn't worry about squandering the time. You care so much it terrifies you. The armor is there because last time you cared and hoped, the hip kept hurting and it felt like your body lied to you.</p>
+    <p>You had hip surgery because your body finally said what your mouth wouldn't: <strong>I can't keep going like this.</strong> Your blood pressure is spiking because your nervous system has been in fight-or-flight for so long it forgot there was another gear. You stopped sleeping. You stopped feeling. You replaced presence with productivity and called it being a good provider.</p>
 
-    <p>The THC is not the problem. It is what a good man reaches for when he decides the pain of feeling is worse than the cost of disappearing. But disappearing has a cost too. Kim sees it. Ryan and Hailey feel it. And somewhere under the fog, you feel the distance growing and it makes everything worse.</p>
+    <p>You are not a bad man. You've believed that story for years. You built a whole identity around it: I'm the guy who did bad things, so I don't deserve good things, so I'll numb the pain of not having them, which proves I don't deserve them. That loop is elegant and it is a lie. Shame is not the same as guilt. Guilt says you did things that hurt people. That's true and you can make it right. Shame says you ARE bad. That is false and it will eat you alive if you let it. You are a good man running a bad operating system. The Nice Guy pattern isn't kindness. It's a transaction. You give everything so no one can accuse you of not caring, and then you resent them for not noticing. You absorb everyone's work so you feel indispensable, and then you're angry that no one protects your time. You perform competence because if they saw what's underneath, you think they'd leave.</p>
 
-    <p>This surgery is not a magic reset. The labrum repair gives you a body that works. The protocol gives you a structure to follow. But the actual turnaround - the one you're hoping for - that comes from one decision: to believe it might work without requiring a guarantee first.</p>
+    <p>They won't leave. Kim hasn't left. Hailey and Ryan haven't left. But you have. You left the room months ago. Your body was on the couch but you were somewhere else. Numb. Checked out. Gone.</p>
 
-    <p>You don't need to know it will work. You just need to be willing to find out.</p>
+    <p><strong>This recovery is not about your hip.</strong> Your hip will heal whether you do this protocol or not. This is about whether you come back. Whether Dan Ballanco, the actual man, shows up again in his own house, in his own body, in his own life. Whether you stop building cages you call careers and start building something your kids will want to inherit.</p>
+
+    <p>You built this entire document. You coded a website and deployed it from your phone the night after surgery while still foggy from anesthesia. That's not a man who doesn't care. That's a man who is so terrified of hoping again that he has to engineer the hope into a system with time blocks and audit scripts. That's OK. Use the system. But know that underneath all the structure, the real work is simpler and harder than any query you've ever written:</p>
+
+    <p><strong>Feel the thing you've been running from. Stay in the room. Don't leave again.</strong></p>
+
+    <p>You are 49 in two weeks. You are not limping there. You are charging. You are charging towards 50 with your eyes open, your body healing, your mind clearing, and your kids in the room with a father who is actually present. Not performing. Present.</p>
+
+    <p>Ryan is 10. Hailey is 14. The window where they want you around is closing and it doesn't send a notification. There is no sprint review for fatherhood. There is no rollback.</p>
+
+    <p>March 1. You drew the line. Now hold it.</p>
 
     <div class="callout remember">
-      <p><strong>"The reset costs more."</strong> When tempted.</p>
-      <p><strong>"Compound interest on performance."</strong> When executing.</p>
-      <p>You have the structure. Follow it. Trust it.</p>
+      <p><strong>"The reset costs more."</strong> Every single time.</p>
+      <p><strong>"Compound interest on performance."</strong> Every single day.</p>
+      <p>You don't need to know it will work. You just need to be willing to find out.</p>
     </div>
   </section>
 
-  <footer><p>The Reset &middot; Dan Ballanco &middot; February 2026</p></footer>
+
+  <footer><p>The Reset - Dan Ballanco - March 2026</p></footer>
 </div>
 
 <button class="top-btn" id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
@@ -498,21 +1319,17 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
   var sections = document.querySelectorAll('section[id]');
   var navLinks = document.querySelectorAll('nav a');
 
-  function updateNav() {
-    var current = '';
-    for (var i = 0; i < sections.length; i++) {
-      if (sections[i].getBoundingClientRect().top < 80) current = sections[i].id;
-    }
-    for (var j = 0; j < navLinks.length; j++) {
-      navLinks[j].classList.toggle('active', navLinks[j].getAttribute('href') === '#' + current);
-    }
-  }
-
   var ticking = false;
   window.addEventListener('scroll', function() {
     if (!ticking) {
       requestAnimationFrame(function() {
-        updateNav();
+        var current = '';
+        for (var i = 0; i < sections.length; i++) {
+          if (sections[i].getBoundingClientRect().top < 80) current = sections[i].id;
+        }
+        for (var j = 0; j < navLinks.length; j++) {
+          navLinks[j].classList.toggle('active', navLinks[j].getAttribute('href') === '#' + current);
+        }
         document.getElementById('topBtn').classList.toggle('visible', window.scrollY > 400);
         ticking = false;
       });
