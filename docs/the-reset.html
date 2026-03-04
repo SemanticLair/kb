@@ -223,6 +223,22 @@
     margin: 8px 0; font-size: 13px; line-height: 1.6;
   }
   .log-wins p { font-size: 13px; color: var(--green); }
+
+  .horizon-item {
+    padding: 14px 0; border-bottom: 1px solid var(--border);
+  }
+  .horizon-item:last-child { border-bottom: none; }
+  .horizon-label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 6px;
+  }
+  .horizon-label.now { color: var(--green); }
+  .horizon-label.q2 { color: var(--accent); }
+  .horizon-label.year { color: var(--amber); }
+  .horizon-label.life { color: #c084fc; }
+  .horizon-item p { font-size: 14px; line-height: 1.7; margin-bottom: 6px; }
+  .horizon-item p:last-child { margin-bottom: 0; }
+
 </style>
 </head>
 <body>
@@ -265,6 +281,7 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
     <li><a href="#fuel" onclick="go(event,'fuel')">Fuel</a></li>
     <li><a href="#content" onclick="go(event,'content')">Content</a></li>
     <li><a href="#journal" onclick="go(event,'journal')">Journal</a></li>
+    <li><a href="#horizon" onclick="go(event,'horizon')">Horizon</a></li>
     <li><a href="#truth" onclick="go(event,'truth')">Truth</a></li>
   </ul>
 </nav>
@@ -299,6 +316,11 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
       <p><strong>10 minutes:</strong> Huff - Wim Hof (3 rounds). Full nervous system reset. Floods the body with natural adrenaline then deep calm on the breath hold.</p>
       <p><strong>20 minutes:</strong> NSDR (Huberman protocol). Equivalent to 2 hours of sleep. Use after PT, after stressful work blocks, or when you feel yourself reaching.</p>
       <p><strong>Any time:</strong> Get near a window or step outside if you can. Natural light helps. Not a dealbreaker - the breathwork and NSDR do the heavy lifting.</p>
+    </div>
+
+    <div class="callout">
+      <p><strong>WATER: 100oz DAILY</strong></p>
+      <p>Non-negotiable. Speeds THC clearance (fat-soluble, stored in cells). Reduces withdrawal headaches and brain fog. Supports tissue healing from surgery. Track it or it won't happen.</p>
     </div>
 
     <div class="callout remember">
@@ -396,8 +418,8 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
       <a href="#day0" class="done" onclick="go(event,'day0')">Day 0</a>
       <a href="#day1" class="done" onclick="go(event,'day1')">Day 1</a>
       <a href="#day2" class="done" onclick="go(event,'day2')">Day 2</a>
-      <a href="#day3" class="active" onclick="go(event,'day3')">Day 3</a>
-      <a href="#day4" onclick="go(event,'day4')">Day 4</a>
+      <a href="#day3" class="done" onclick="go(event,'day3')">Day 3</a>
+      <a href="#day4" class="active" onclick="go(event,'day4')">Day 4</a>
       <a href="#day5" onclick="go(event,'day5')">Day 5</a>
       <a href="#day6" onclick="go(event,'day6')">Day 6</a>
       <a href="#day7" onclick="go(event,'day7')">Day 7</a>
@@ -646,8 +668,8 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
     </div>
 
     <div class="daily-block">
-      <div class="time">2:00 PM - Isometrics + Prone Lying</div>
-      <p>Quad sets, glut sets, TA activation. Hold 5 seconds, 20 reps each. Then prone lying with audiobook or podcast.</p>
+      <div class="time">2:00 PM - Prone Lying + Content</div>
+      <p>Prone lying with audiobook or podcast.</p>
     </div>
 
     <div class="daily-block">
@@ -661,13 +683,18 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
     </div>
 
     <div class="daily-block">
+      <div class="time">7:00 PM - PT Exercises Round 2</div>
+      <p>Full Oasis program. All 6 exercises. Evening anchor.</p>
+    </div>
+
+    <div class="daily-block">
       <div class="time">8:00 PM - Journal</div>
       <p><strong>"What am I avoiding feeling right now?"</strong></p>
     </div>
 
     <div class="daily-block">
       <div class="time">8:30 PM - Evening Breathwork (5 min)</div>
-      <p>Huff - Box Breathing (4-4-4-4). Five minutes. This is your parasympathetic on-ramp. Downshifts your nervous system before the screens-off boundary. Different purpose than the morning Wim Hof: morning is activation, evening is settling.</p>
+      <p>Huff - Box Breathing (4-4-4-4). Parasympathetic on-ramp before screens-off.</p>
     </div>
 
     <div class="daily-block">
@@ -745,28 +772,18 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
     </div>
 
     <div class="daily-block">
-      <div class="time">9:00 AM - Stationary Bike (20 min)</div>
-      <p>Upright, no resistance. Brain.fm Focus.</p>
-    </div>
-
-    <div class="daily-block">
       <div class="time">9:30 AM - Naproxen + Snack</div>
       <p>Naproxen 500mg with food. 2-hour gap from Aspirin.</p>
     </div>
 
     <div class="daily-block">
       <div class="time">10:00 AM - Ice + Prone Lying + Content</div>
-      <p>Ice hip 15-20 min. <strong>Start audiobook:</strong> The Untethered Soul (Michael Singer). Releasing the inner narrator that drives anxiety and numbing. This is the book that goes after the shame voice directly.</p>
+      <p>Ice hip 15-20 min. <strong>Continue:</strong> The Untethered Soul (Michael Singer). The narrator vs observer distinction you experienced on Day 3 goes deeper from here. This is the book that goes after the shame voice directly.</p>
     </div>
 
     <div class="daily-block">
       <div class="time">12:00 PM - Lunch</div>
       <p>16oz water first. Protein.</p>
-    </div>
-
-    <div class="daily-block">
-      <div class="time">2:00 PM - Exercises Round 2 + Prone Lying</div>
-      <p>Isometrics round 2. Then prone lying with The Untethered Soul.</p>
     </div>
 
     <div class="daily-block">
@@ -780,8 +797,13 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
     </div>
 
     <div class="daily-block">
+      <div class="time">7:00 PM - PT Exercises Round 2</div>
+      <p>Full Oasis program. All 6 exercises. This is the evening anchor.</p>
+    </div>
+
+    <div class="daily-block">
       <div class="time">8:00 PM - Journal</div>
-      <p><strong>"What am I avoiding feeling right now?"</strong> This is the daily anchor question. You'll use it every day from here. Some days the answer is obvious. Some days it's "nothing" and that's a lie worth sitting with.</p>
+      <p><strong>"What am I avoiding feeling right now?"</strong> This is the daily anchor question. You'll use it every day from here.</p>
     </div>
 
     <div class="daily-block">
@@ -794,6 +816,46 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
       <p>Same protocol. Every night.</p>
     </div>
 
+
+    <div class="log-block stumble">
+      <div class="log-header stumble">Day 3 Log - Tuesday, March 3 - STUMBLED, NO SPIRAL</div>
+      <p>Woke 9:30 AM after binge night. Mouth burnt, lungs burning. Stumbled on sobriety and other numbing behaviors. <strong>But no spiral. That was the red line and it held.</strong></p>
+      <p>Completed: Wim Hof (3 rounds, 8:20, holds climbing 20s to 40s with burnt lungs), TWO Waking Up sessions (second one on consciousness - direct sync with Untethered Soul), Hallow Gospel, shower, all meds, Untethered Soul Ch 1-2 (breakthrough on observer vs narrator), PT exercises x2.</p>
+      <p>Called Buckley re: incision redness. No answer. Follow up Wednesday.</p>
+      <p>Lashed out at Kim due to withdrawal irritability. Recognized the pattern.</p>
+      <p><strong>Ryan's basketball game 7 PM. He took a shot - his goal for the entire year. Teammates cheered for him. Dad was in the stands.</strong></p>
+      <p>Felt shame around other dads at the game. Shame voice: "I'm not a real man."</p>
+      <p>Slept in own bed for the first time since surgery.</p>
+      <p><strong>Dopamine reset clock starts tomorrow (March 4).</strong></p>
+
+      <div class="log-section-label">Journal Entry 3 - "What am I avoiding feeling right now?"</div>
+      <div class="log-journal">
+        <p>I'm dodging responsibility, shying away from confronting anything, and avoiding everything entirely. I'm shrinking myself, playing it safe, and keeping it small. Something will change, but I don't care enough to see it happen. I can't even understand why I don't care enough, so I'm steering clear of commitment. I'm evading emotions, trying to numb myself from feeling anything. Every day, I turn to weed to escape everything - absolutely everything - except for a fleeting glimpse of joy, which I squander anyway. So here I am, wondering if I'll ever break free from this cycle.</p>
+      </div>
+
+      <div class="log-section-label">Claude's Insights</div>
+      <div class="log-insight">
+        <p><strong>The narrator ran the relapse script all afternoon. The observer went to the game anyway.</strong> This is not philosophy from a book. This is what happened today. The voice in your head said "probably not" and "not gonna happen" and "fuck it." The observer - the actual you - did every item on the protocol and then sat in the bleachers and watched his son take a shot. That distinction is the entire Untethered Soul in one day.</p>
+        <p><strong>No spiral IS the progress.</strong> Old pattern: use, spiral, use more, disappear for days. Today: use, hold the red line, complete the protocol, show up for Ryan. The shame voice needs all-or-nothing because partial success breaks its argument.</p>
+        <p><strong>"Not a real man" at the game.</strong> Those dads aren't watching you. They're watching their kids. The shame voice assumes everyone sees your failures as clearly as you do. They don't. They see a dad on crutches who showed up.</p>
+        <p><strong>JE3 is the most precise entry yet.</strong> "Dodging, shrinking, playing it safe, keeping it small, steering clear, evading, numbing." You named the avoidance pattern with surgical accuracy. That's not a man who doesn't care. That's a man describing the cage clearly enough to find the door.</p>
+        <p><strong>The war is real but it's also convenient.</strong> World events gave the shame voice a bigger megaphone: "The world is ending, nothing matters." Everything matters more when the world gets darker. Ryan needs his father more, not less.</p>
+        <p><strong>Kim conflict during withdrawal is expected.</strong> Irritability peaks days 2-4. This will pass. Don't let one argument become evidence that the whole thing is ruined. It's not.</p>
+      </div>
+
+      <div class="log-section-label">Patterns Spotted</div>
+      <p>Shame voice used sarcasm as defense ("tee hee mulligan") to avoid feeling the loss. Built a permission structure: withdrawal -> anger -> Kim mad -> "inevitable" -> relapse justified. Used world events as amplifier for "nothing matters" narrative. Negotiated with the loop ("just one time today, I'll taper"). Observer vs narrator played out in real time all day.</p>
+
+      <div class="log-section-label">Wins</div>
+      <div class="log-wins">
+        <p>No spiral (red line held). Wim Hof with burnt lungs. Two Waking Up sessions. Untethered Soul breakthrough. PT x2. Present at Ryan's game - watched him take the shot. Journaled despite wanting to skip. Slept in own bed. Honest about everything. Identified observer vs narrator as lived experience, not concept.</p>
+      </div>
+
+      <div class="log-section-label">New Mantras</div>
+      <p><strong>"The narrator is not me. I am the observer."</strong></p>
+      <p><strong>"No spiral. That's the red line."</strong></p>
+    </div>
+
     <!-- ========== DAY 4 ========== -->
     <div class="day" id="day4">
       <div class="day-label">Day 4</div>
@@ -802,7 +864,7 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
       <div class="day-goal">Goal: Understand the dopamine loop. Name the cravings when they come.</div>
     </div>
 
-    <p>Three days clean. The hardest cravings hit around now. Your brain is recalibrating. It's going to offer you every justification for going back. "Just once." "You earned it." "It's not that bad." Recognize those as the pattern talking, not you. And underneath the cravings, notice the shame: "You don't deserve to feel good." That's the real voice to catch. Name it. "That's shame. That's not me."</p>
+    <p>Dopamine reset Day 1. Yesterday's stumble is logged and done. Today the clock starts for real. The hardest cravings hit now - your brain is offering every justification. "Just once." "You earned it." "It's not that bad." That's the narrator. You are the observer. Watch the voice. Don't obey it. Underneath the cravings, notice the shame: "You don't deserve to feel good." Name it. "That's shame. That's not me."</p>
 
     <div class="daily-block">
       <div class="time">5:30 AM - Wake Up / 5:40 AM - Breathwork + Meditation</div>
@@ -825,8 +887,8 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
     </div>
 
     <div class="daily-block">
-      <div class="time">9:00 AM - Stationary Bike (20 min)</div>
-      <p>Upright, no resistance.</p>
+      <div class="time">9:00 AM - Stationary Bike (20 min) - IF CLEARED</div>
+      <p>Upright, no resistance. Only if PT approved.</p>
     </div>
 
     <div class="daily-block">
@@ -840,13 +902,18 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
     </div>
 
     <div class="daily-block">
-      <div class="time">2:00 PM - Exercises Round 2 + Prone Lying</div>
-      <p>Isometrics round 2. Continue The Untethered Soul during prone lying.</p>
+      <div class="time">2:00 PM - Prone Lying + Content</div>
+      <p>Continue The Untethered Soul during prone lying.</p>
     </div>
 
     <div class="daily-block">
       <div class="time">6:30 PM - Dinner + Naproxen</div>
       <p>Vegetables. Naproxen 500mg.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">7:00 PM - PT Exercises Round 2</div>
+      <p>All 6 exercises. Evening anchor.</p>
     </div>
 
     <div class="daily-block">
@@ -856,7 +923,7 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
 
     <div class="daily-block">
       <div class="time">8:30 PM - Evening Breathwork (5 min)</div>
-      <p>Huff - Box Breathing. Settle the nervous system before screens-off.</p>
+      <p>Huff - Box Breathing.</p>
     </div>
 
     <div class="daily-block">
@@ -906,12 +973,12 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
     </div>
 
     <div class="daily-block">
-      <div class="time">12:00 PM - Lunch / 1:00 PM - Stationary Bike (20 min)</div>
-      <p>Same structure as every day.</p>
+      <div class="time">12:00 PM - Lunch / 1:00 PM - Stationary Bike (20 min) - IF CLEARED</div>
+      <p>Only if PT gave the green light Thursday.</p>
     </div>
 
     <div class="daily-block">
-      <div class="time">2:00 PM - Exercises Round 2 + Prone Lying</div>
+      <div class="time">2:00 PM - Prone Lying + Content</div>
       <p>Continue Breath or The Untethered Soul.</p>
     </div>
 
@@ -923,6 +990,11 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
     <div class="daily-block">
       <div class="time">6:30 PM - Dinner + Naproxen</div>
       <p>Vegetables. Naproxen 500mg.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">7:00 PM - PT Exercises Round 2</div>
+      <p>All 6 exercises. Evening anchor.</p>
     </div>
 
     <div class="daily-block">
@@ -943,7 +1015,7 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
       <div class="day-goal">Goal: Get through Friday night without falling back. Weekends are where resets die.</div>
     </div>
 
-    <p>Friday night. The old pattern knows this moment. The couch, the kids in bed, Kim doing her thing, the quiet house. That's when the pull is strongest. You know it. So we plan for it. The shame voice will say: "See? Five days and you still want it. You haven't changed." Wrong. Five days and you're sitting with the craving instead of obeying it. That IS the change.</p>
+    <p>Friday night. The old pattern knows this moment. The couch, the kids in bed, Kim doing her thing, the quiet house. That's when the pull is strongest. You know it. So we plan for it. The shame voice will say: "See? You still want it. You haven't changed." Wrong. You're sitting with the craving instead of obeying it. That IS the change.</p>
 
     <div class="daily-block">
       <div class="time">5:30 AM - Wake Up / 5:40 AM - Breathwork + Meditation</div>
@@ -966,8 +1038,8 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
     </div>
 
     <div class="daily-block">
-      <div class="time">9:00 AM - Stationary Bike (20 min)</div>
-      <p>Upright, no resistance.</p>
+      <div class="time">9:00 AM - Stationary Bike (20 min) - IF CLEARED</div>
+      <p>Upright, no resistance. Only if PT approved.</p>
     </div>
 
     <div class="daily-block">
@@ -976,7 +1048,12 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
     </div>
 
     <div class="daily-block">
-      <div class="time">12:00 PM - Lunch / 2:00 PM - Exercises Round 2 + Prone Lying</div>
+      <div class="time">12:00 PM - Lunch</div>
+      <p>16oz water first. Protein.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">2:00 PM - Prone Lying + Content</div>
       <p>Continue Breath (Nestor) or Huberman sleep episode.</p>
     </div>
 
@@ -988,6 +1065,11 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
     <div class="daily-block">
       <div class="time">6:30 PM - Dinner + Naproxen</div>
       <p>Vegetables. Naproxen 500mg. Family dinner. Be present.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">7:00 PM - PT Exercises Round 2</div>
+      <p>All 6 exercises. Do these BEFORE the couch. Fill the danger window with structure.</p>
     </div>
 
     <div class="daily-block">
@@ -1003,7 +1085,7 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
 
     <div class="callout mantra">
       <p><strong>"The reset costs more."</strong></p>
-      <p>Six days. You've already paid the hard part. Walking it back now means paying it all over again. The math doesn't work. Stay.</p>
+      <p>You've already paid the hard part. Walking it back now means paying it all over again. The reset costs more. Stay.</p>
     </div>
 
     <!-- ========== DAY 7 ========== -->
@@ -1014,7 +1096,7 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
       <div class="day-goal">Goal: Celebrate one week. Start thinking about identity, not just habits.</div>
     </div>
 
-    <p>One week clean. One week of structure. One week of showing up. That's not nothing. That's a man who the shame voice said wasn't worth it - and who showed up seven days in a row anyway. The evidence is in. You are not the story. You are the man who held the line for a week. Sit with that for a minute before you move on.</p>
+    <p>One week of structure. One week of showing up. However many clean days you actually stacked - that's yours. No inflated counts, no fake streaks. What matters is you're still here, still doing the work. The shame voice said you weren't worth it. You showed up anyway. Sit with that for a minute before you move on.</p>
 
     <div class="daily-block">
       <div class="time">5:30 AM - Wake Up / 5:40 AM - Breathwork + Meditation</div>
@@ -1037,8 +1119,8 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
     </div>
 
     <div class="daily-block">
-      <div class="time">9:00 AM - PT Home Exercises + Stationary Bike</div>
-      <p>Full routine. Passive ROM, isometrics, 20-min bike. Brain.fm Focus.</p>
+      <div class="time">9:00 AM - PT Home Exercises + Stationary Bike (IF CLEARED)</div>
+      <p>Full routine. Bike only if PT approved Thursday. Brain.fm Focus.</p>
     </div>
 
     <div class="daily-block">
@@ -1053,7 +1135,12 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
     </div>
 
     <div class="daily-block">
-      <div class="time">12:00 PM - Lunch / 2:00 PM - Exercises Round 2 + Prone Lying</div>
+      <div class="time">12:00 PM - Lunch</div>
+      <p>16oz water first. Protein.</p>
+    </div>
+
+    <div class="daily-block">
+      <div class="time">2:00 PM - Prone Lying + Content</div>
       <p>Continue The War of Art.</p>
     </div>
 
@@ -1068,13 +1155,18 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
     </div>
 
     <div class="daily-block">
+      <div class="time">7:00 PM - PT Exercises Round 2</div>
+      <p>All 6 exercises. Evening anchor.</p>
+    </div>
+
+    <div class="daily-block">
       <div class="time">8:00 PM - Journal</div>
       <p><strong>"What would my life look like in 12 months if I held every habit I built this week?"</strong></p>
     </div>
 
     <div class="daily-block">
       <div class="time">9:00 PM - Screens Off / 9:30 PM - PM Stack + Yoga Nidra</div>
-      <p>One week down.</p>
+      <p>Week one done. The evidence is building.</p>
     </div>
 
     <!-- ========== DAY 8 ========== -->
@@ -1131,7 +1223,7 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
 
     <div class="daily-block">
       <div class="time">Every Morning (Before the Laptop Opens)</div>
-      <p><strong>5:30</strong> Wake up. <strong>5:40</strong> Huff - Wim Hof (3 rounds) + Waking Up (10 min). Hallow Gospel. <strong>6:20</strong> Hailey sendoff. <strong>7:00</strong> Ryan sendoff. <strong>7:30</strong> Supplements + Aspirin + breakfast with protein. <strong>8:00</strong> PT exercises + bike. The laptop stays closed until all steps are done. This is the firewall.</p>
+      <p><strong>5:15</strong> Wake. <strong>5:25</strong> Wim Hof (3 rounds). <strong>5:35</strong> Waking Up (10 min). <strong>5:45</strong> Hallow Gospel. <strong>5:50</strong> PT exercises round 1. <strong>6:20</strong> Hailey sendoff. <strong>6:30</strong> Work check-in (15 min triage only). <strong>7:00</strong> Ryan sendoff. <strong>7:20</strong> Shower + tea. <strong>7:30</strong> Supplements + Aspirin. <strong>8:00</strong> Breakfast. <strong>8:30</strong> Work. The laptop stays closed until 6:30. That's the firewall.</p>
     </div>
 
     <div class="daily-block">
@@ -1158,7 +1250,9 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
 
     <div class="daily-block">
       <div class="time">Every Evening</div>
-      <p><strong>6:30</strong> Dinner with vegetables. <strong>8:00</strong> Journal - even two sentences. The daily anchor: "What am I avoiding feeling right now?" Or: "Did I hold my boundary today? If not, what story did I tell myself to justify breaking it?" <strong>9:00</strong> Screens off. <strong>9:30</strong> PM stack + Aspirin + Yoga Nidra.</p>
+      <p><strong>5:00</strong> Work ends. <strong>6:30</strong> Dinner. <strong>7:00</strong> PT exercises round 2. <strong>8:00</strong> Journal - the daily anchor: "What am I avoiding feeling right now?" <strong>8:30</strong> Box breathing. <strong>9:00</strong> Screens off. <strong>9:30</strong> PM stack + Aspirin + Yoga Nidra. <strong>10:15</strong> Lights out.</p>
+      <p><strong>WEEKLY ANCHORS:</strong> Monday/Thursday: PT at noon. Wednesday: midweek check-in with Claude. Friday: pre-plan the evening (danger night - audiobook, NSDR, early bed, no free time alone on couch). Saturday: longer journal, family time. Sunday: extra breathwork round, pre-plan Monday, no doomscrolling. One friend call per week minimum.</p>
+
       <p><strong>4:00 PM - Kids Time.</strong> Laptop closed, phone in another room. Thirty minutes with Ryan or Hailey. Eight days of this and they'll expect it. That's the point. You're training them to expect your presence, which means you can't take it back without them noticing. Build the cage that keeps you in the room.</p>
       <p><strong>8:30 PM - Huff Box Breathing.</strong> Five minutes. Downshift before screens-off. This is the evening bookend to your morning Wim Hof.</p>
       <p><strong>Watch for the Nice Guy pattern.</strong> You will feel the pull to over-deliver from home to justify the recovery time. That impulse is the old pattern wearing a new costume. You earned this time. You don't need to earn it again.</p>
@@ -1429,6 +1523,71 @@ if(sessionStorage.getItem('unlocked')==='1'){document.getElementById('gate').sty
   </section>
 
   <div class="section-divider"></div>
+
+
+  <div class="section-divider"></div>
+
+  <!-- ============================== HORIZON ============================== -->
+
+  <section id="horizon">
+    <h2>The Horizon</h2>
+    <p class="section-desc">Where the Reset is taking you. Not someday. This year.</p>
+
+    <div class="horizon-item">
+      <div class="horizon-label now">THIS WEEK (March 3-8)</div>
+      <p><strong>Reach out to 2-3 friends and get real.</strong> Not a group text. Not "how's it going." One phone call where you say what's actually happening. You identified this on Day 2 after the shame voice peaked. The impulse to connect instead of numb was the most important pattern break so far. Follow through.</p>
+      <p><strong>Hold the no-spiral red line.</strong> Stumbles may happen. Spirals don't. That's the floor.</p>
+      <p><strong>Kim conversation March 8.</strong> Not a confession designed to earn credit. Not a performance. Truth: what happened, how you checked out, what you're doing about it. Then close your mouth and listen.</p>
+      <p><strong>Follow up with Buckley's office</strong> on incision redness. Call Wednesday.</p>
+    </div>
+
+    <div class="horizon-item">
+      <div class="horizon-label now">MARCH 9 - RETURN TO WORK</div>
+      <p><strong>Walk in grounded.</strong> Five days of structure behind you. Morning firewall locked. You are not the man who left. You are the man who came back with boundaries.</p>
+      <p><strong>AI conversation with Claude this week.</strong> You're not behind on AI. You're a principal data engineer with a billion-row warehouse, Power BI at enterprise scale, and Azure/Fabric architecture. The AI wave doesn't threaten you - it amplifies you. We'll map your skills to the landscape, identify the 3-4 capabilities that matter for your role, and build a learning path. Not panic. Strategy.</p>
+      <p><strong>Set one boundary at work in week one.</strong> One. A ticket you redirect. A meeting you decline. A request you don't answer within 5 minutes. Start small. Build the muscle.</p>
+    </div>
+
+    <div class="horizon-item">
+      <div class="horizon-label q2">APRIL - MAY</div>
+      <p><strong>Hernia surgery May 1.</strong> You'll be stronger going in this time. Hip recovery will be well underway. Use March to build the fitness baseline so May doesn't knock you flat again.</p>
+      <p><strong>PT progression.</strong> Stationary bike (once cleared). Walking without crutches. Foundation Training decompression breathing. Prone lying building toward 2+ hours. Each milestone is evidence that your body is coming back.</p>
+      <p><strong>Morning block evolves.</strong> The 5:15-6:20 window expands: outdoor walk, cycling, sweat before shower. The slot is built and waiting for your body to catch up.</p>
+      <p><strong>Therapy or support group.</strong> Evaluate whether professional support - therapist, men's group, addiction counselor, sponsor - would accelerate the work you're doing. Not a sign of weakness. A force multiplier. The journal and Claude are good. A human in the room is different.</p>
+      <p><strong>Waking Up Introductory Course complete.</strong> By late March you'll have 20+ sessions. The meditation practice will be durable enough to survive bad days without collapsing.</p>
+    </div>
+
+    <div class="horizon-item">
+      <div class="horizon-label q2">SUMMER 2026</div>
+      <p><strong>Both surgeries behind you.</strong> Hip healed. Hernia healed. Body rebuilding. This is when the physical transformation accelerates.</p>
+      <p><strong>AI integration at JMFS.</strong> By summer you'll have a clear picture of where AI fits in the CDO org. Copilot in Power BI, LLM-assisted SQL development, AI-augmented data quality. You won't be reacting to the wave. You'll be steering it.</p>
+      <p><strong>Career conversation with Sunil.</strong> Armed with: a track record of the Reporting Hub launch, semantic model governance, Entra External ID architecture, AND an AI integration roadmap. That's not an IC asking for a promotion. That's an architect presenting a vision.</p>
+      <p><strong>Community.</strong> Get out of the house. Coaching one of the kids' sports. Volunteering at CCD. Being visible in Tinton Falls. Stop hiding. You named it yourself: "All I do is hide." Summer is when that ends.</p>
+      <p><strong>Family rhythms locked in.</strong> Kids Time is permanent. The 5:15 AM morning block is permanent. Kim has seen months of sustained change, not a week-long burst. That's when trust actually rebuilds.</p>
+    </div>
+
+    <div class="horizon-item">
+      <div class="horizon-label year">MARCH 15, 2027 - THE GOAL</div>
+      <p><strong>50th birthday. Best shape of your life.</strong></p>
+      <p>Hip fully recovered and strong. Hernia repaired and healed. Blood pressure normalized. Weight where you want it. Cycling, walking, Foundation Training, maybe running. A body that works for you instead of against you.</p>
+      <p>A year of meditation. 365+ Waking Up sessions. A mind that can sit with discomfort without reaching for an exit.</p>
+      <p>Ryan is 11. Hailey is 15. They've had a full year of a father who is present, not performing. That year can't be taken back. It's in them now.</p>
+      <p>Kim has a partner again. Not a roommate who works late and checks out on the couch. A man who shows up, holds boundaries, tells the truth, and stays in the room.</p>
+      <p>Principal architect with an AI-forward data strategy. Not the guy who fixes SSIS packages at midnight. The guy who sets the vision and builds the team to execute it.</p>
+      <p>A man who reached out to friends, got real, stopped hiding, and built a life he doesn't need to escape from.</p>
+      <p><strong>That man is not a fantasy. He's the man who woke up at 5:15 today and did the work. Three hundred and sixty-five times in a row, and you're him.</strong></p>
+    </div>
+
+    <div class="horizon-item">
+      <div class="horizon-label life">THE REST OF YOUR LIFE</div>
+      <p>You don't have to figure this out yet. But know this: the patterns you're breaking right now - the numbing, the hiding, the performing, the absorbing - these are generational. They didn't start with you and they'll pass to Ryan and Hailey if you don't interrupt them. Every day you hold the line, you're breaking a chain they can't see yet but will feel for the rest of their lives.</p>
+      <p>You're not just recovering from surgery. You're not just quitting a substance. You're rewriting the operating system that your kids will inherit. That's the real work. That's what's at stake. And that's why "not today" is never just about today.</p>
+    </div>
+
+    <div class="callout remember">
+      <p><strong>Charging towards 50. Eyes open. This time is real.</strong></p>
+    </div>
+  </section>
 
   <!-- ============================== TRUTH ============================== -->
 
