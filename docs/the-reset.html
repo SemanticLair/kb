@@ -553,9 +553,47 @@ footer {
   .truth-section p { font-size: 15px; }
   nav a { padding: 12px 10px; font-size: 10px; }
 }
+
+  /* PASSWORD SCREEN */
+  .lock-screen {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--bg); z-index: 9999;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    transition: opacity 0.5s;
+  }
+  .lock-screen.unlocked { opacity: 0; pointer-events: none; }
+  .lock-title {
+    font-size: 14px; color: var(--text-dim);
+    letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .lock-input {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px 20px;
+    color: var(--text); font-family: var(--mono);
+    font-size: 16px; text-align: center;
+    width: 200px; outline: none;
+    -webkit-text-security: disc;
+  }
+  .lock-input:focus { border-color: var(--accent); }
+  .lock-error {
+    color: var(--red); font-size: 12px;
+    margin-top: 12px; opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .lock-error.visible { opacity: 1; }
 </style>
 </head>
 <body>
+
+<div class="lock-screen" id="lockScreen">
+  <div class="lock-title">Enter to continue</div>
+  <input class="lock-input" id="lockInput" type="password" placeholder="" autofocus
+    onkeydown="if(event.key==='Enter')tryUnlock()">
+  <div class="lock-error" id="lockError">Try again</div>
+</div>
+
 
 <!-- ====== HERO ====== -->
 <div class="hero">
@@ -574,7 +612,7 @@ footer {
     <li><a href="#dashboard" onclick="go(event,'dashboard')">Dashboard</a></li>
     <li><a href="#protocol" onclick="go(event,'protocol')">Protocol</a></li>
     <li><a href="#days" onclick="go(event,'days')">Days</a></li>
-    <li><a href="#weekend" onclick="go(event,'weekend')">Weekend</a></li>
+    <li><a href="#monday" onclick="go(event,'monday')">Monday</a></li>
     <li><a href="#rehab" onclick="go(event,'rehab')">Rehab</a></li>
     <li><a href="#fuel" onclick="go(event,'fuel')">Fuel</a></li>
     <li><a href="#content" onclick="go(event,'content')">Content</a></li>
@@ -599,10 +637,10 @@ footer {
     <a href="#day2" class="progress-dot stumble" onclick="go(event,'day2')">2</a>
     <a href="#day3" class="progress-dot stumble" onclick="go(event,'day3')">3</a>
     <a href="#day4" class="progress-dot stumble" onclick="go(event,'day4')">4</a>
-    <a href="#day5" class="progress-dot stumble" onclick="go(event,'day5')">5</a>
-    <a href="#day6" class="progress-dot active" onclick="go(event,'day6')">6</a>
-    <a href="#day7" class="progress-dot future" onclick="go(event,'day7')">7</a>
-    <a href="#day8" class="progress-dot future" onclick="go(event,'day8')">8</a>
+    <a href="#day5" class="progress-dot done" onclick="go(event,'day5')">5</a>
+    <a href="#day6" class="progress-dot stumble" onclick="go(event,'day6')">6</a>
+    <a href="#day7" class="progress-dot stumble" onclick="go(event,'day7')">7</a>
+    <a href="#day8" class="progress-dot active" onclick="go(event,'day8')">8</a>
     <span class="progress-dot future">9</span>
     <span class="progress-dot future">10</span>
     <span class="progress-dot future">...</span>
@@ -611,16 +649,16 @@ footer {
 
   <div class="stat-grid">
     <div class="stat-box">
-      <div class="stat-num green">6</div>
+      <div class="stat-num green">8</div>
       <div class="stat-label">Days In</div>
     </div>
     <div class="stat-box">
-      <div class="stat-num accent">5</div>
+      <div class="stat-num accent">8</div>
       <div class="stat-label">Waking Up Sessions</div>
     </div>
     <div class="stat-box">
-      <div class="stat-num amber">0</div>
-      <div class="stat-label">Clean Days</div>
+      <div class="stat-num green">3</div>
+      <div class="stat-label">Sober Nights</div>
     </div>
     <div class="stat-box">
       <div class="stat-num purple">3</div>
@@ -658,14 +696,46 @@ footer {
       </div>
       <div class="chart-bar-row">
         <div class="chart-bar-label">Day 6</div>
-        <div class="chart-bar-track"><div class="chart-bar-fill accent" style="width:15%">Bike Only</div></div>
+        <div class="chart-bar-track"><div class="chart-bar-fill amber" style="width:15%"></div></div>
+      </div>
+      <div class="chart-bar-row">
+        <div class="chart-bar-label">Day 7</div>
+        <div class="chart-bar-track"><div class="chart-bar-fill amber" style="width:75%">Massive + Blowup</div></div>
+      </div>
+      <div class="chart-bar-row">
+        <div class="chart-bar-label">Day 8</div>
+        <div class="chart-bar-track"><div class="chart-bar-fill accent" style="width:50%">In Progress</div></div>
       </div>
     </div>
-    <p style="font-size:11px;color:var(--text-dim);margin-top:12px;font-family:var(--mono)">Amber = stumbled. Blue = active. Green = clean day (goal: first one is coming).</p>
+    <p style="font-size:11px;color:var(--text-dim);margin-top:12px;font-family:var(--mono)">Amber = stumbled. Blue = active. Green = clean/done.</p>
+  </div>
+
+  <!-- Breath Hold Progress -->
+  <div class="chart-container">
+    <div class="card-label green">BREATH HOLD PROGRESS (longest per day)</div>
+    <div style="margin-top:16px">
+      <div class="chart-bar-row">
+        <div class="chart-bar-label">Day 3</div>
+        <div class="chart-bar-track"><div class="chart-bar-fill green" style="width:27%">0:40</div></div>
+      </div>
+      <div class="chart-bar-row">
+        <div class="chart-bar-label">Day 7a</div>
+        <div class="chart-bar-track"><div class="chart-bar-fill green" style="width:43%">1:04</div></div>
+      </div>
+      <div class="chart-bar-row">
+        <div class="chart-bar-label">Day 7b</div>
+        <div class="chart-bar-track"><div class="chart-bar-fill green" style="width:60%">1:30</div></div>
+      </div>
+      <div class="chart-bar-row">
+        <div class="chart-bar-label">Day 8</div>
+        <div class="chart-bar-track"><div class="chart-bar-fill green" style="width:59%">1:28</div></div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--text-dim);margin-top:12px;font-family:var(--mono)">Tuesday: 40s with burnt lungs. Sunday: 90s steady. Nervous system recovering in real time.</p>
   </div>
 
   <div class="callout amber">
-    <p><strong>WITHDRAWAL PEAKS THIS WEEKEND.</strong> Days 2-4 from last use. Jitters, chills, irritability, cravings at maximum volume. Double breathwork. Physiological sighs on demand. No doomscrolling. The wave peaks and passes. You survive it by not reaching.</p>
+    <p><strong>WITHDRAWAL STATUS: PAST THE PEAK.</strong> Days 2-4 were the worst (Friday-Sunday). Physical symptoms decreasing. Appetite returning. Irritability still present but manageable. Continue Mag Glycinate midday. Breathwork before high-stress interactions. Sleep may still be disrupted through midweek. By Thursday-Friday, noticeably better.</p>
   </div>
 </section>
 
@@ -856,77 +926,124 @@ footer {
   </div>
 
   <!-- DAY 6 -->
-  <div id="day6" class="log off">
-    <div class="log-title">Day 6 - Ran Out</div>
-    <div class="log-date">Friday, March 6 (today)</div>
-    <p>THC supply exhausted. Not by willpower - by supply. Doesn't matter how. It's gone.</p>
-    <p>Bike ride completed (20 min, newly cleared). Everything else pushed to weekend. Friday night: first evening without THC available in months. Withdrawal at peak. Shame voice at full volume.</p>
-    <p>Mag Glycinate helping with jitters. The observer doesn't withdraw - your body does.</p>
-    <p><strong>This is the hardest night of the Reset so far. No substance to reach for. Just the voice and the breathing. Surviving tonight without using is the biggest win of the entire week.</strong></p>
+  <div id="day6" class="log stumble">
+    <div class="log-title">Day 6 - Supply Gone</div>
+    <div class="log-date">Friday, March 6</div>
+    <p>THC supply exhausted. Bike ride completed (20 min). Pushed everything else to weekend.</p>
+    <p>Friday night: first evening without THC available in months. Withdrawal at peak. Shame voice at full volume. "I'm a piece of shit." Felt hopeless. Felt like nothing was accomplished all week.</p>
+    <p>Survived Friday night sober. Not by willpower. By environment. Nothing to reach for. The fortress held.</p>
+    <p>Key insight: withdrawal is Singer's block at the hardware level. Endocannabinoid receptors downregulated. The observer doesn't withdraw - your body does.</p>
+  </div>
+
+  <!-- DAY 7 -->
+  <div id="day7" class="log stumble">
+    <div class="log-title">Day 7 - The Hardest Day</div>
+    <div class="log-date">Saturday, March 7</div>
+    <p><strong>Morning:</strong> Wim Hof 4 rounds (48s to 64s hold). Waking Up Day 7 (key takeaway: "already" - you might already be open and free). Hallow - Prodigal Son. Bike 20 min. PT round 1. First cold shower (10 seconds - 250-300% dopamine elevation). Full Huberman "Controlling Your Dopamine" episode (both versions - essentials + full 2hr).</p>
+    <p><strong>Afternoon:</strong> Second Wim Hof (3 rounds, 90-second hold). Third Wim Hof (3 rounds, 88-second hold). Built a 3D printed Foxy mask with Ryan. Emotional flooding - overwhelming gratitude, beauty, terror of time passing, love for kids at full voltage without a buffer. Identified as Highly Sensitive Person (HSP) trait. The substances weren't numbing sadness. They were numbing the intensity of love.</p>
+    <p><strong>Dopamine recovery protocol extracted from Huberman:</strong> Cold exposure (adopted), protect baseline (no layered pleasure), effort-based reward, morning sunlight. Supplements confirmed solid. Added Vitamin D3 5000 IU to AM stack. Yerba mate tea bags as tea replacement (receptor density, not just dopamine flooding). Tyrosine cycling: work days only starting next week.</p>
+    <p><strong>Evening: The fracture.</strong> Blew up at Kim. Withdrawal irritability + emotional flooding + her questions = explosion. Exactly as predicted. Shame voice: "I wish I was dead. Everyone hates me. I should end it." Falls on stairs (twice - tripped over pillow, then on way back down). Kim furious. Family retreated. Slept on couch again.</p>
+    <p>Cried about not being able to hold Kim. Sleeping separately during menopause. Researched: 30-40% of couples sleep apart. Post-menopause intimacy returns. HRT and vaginal estrogen exist. The transition is brutal but it's a transition, not a destination.</p>
+    <p><strong>Despite the blowup, did not use. Could not use. Environment held. Second consecutive sober night.</strong></p>
+
+    <div class="collapse-trigger" onclick="toggle(this)"><div class="card-label accent">Claude's Insights - Day 7</div></div>
+    <div class="collapse-body">
+      <div class="insight-block">
+        <p><strong>You feel everything at full voltage.</strong> That's not a disorder. That's HSP wiring - 15-20% of the population. Same wiring that makes you an elite pattern-matcher, that makes you cry during meditation, that makes you build a 1,200-line protocol from a hospital bed. The substances weren't turning off sadness. They were turning down love, beauty, and terror. You can't keep one and kill the other.</p>
+        <p><strong>The fracture was predicted and dismissed.</strong> Dan said it was coming. Claude said it was the narrator writing a script. Dan was right. Lesson: trust your pattern knowledge. Build defuse protocols for known triggers instead of pretending they won't happen.</p>
+        <p><strong>"Already."</strong> The Waking Up keyword. You're not building toward something. You're noticing what's already here. The awareness underneath the withdrawal, the shame, the blowup - that awareness is already free.</p>
+        <p><strong>Hard work is the enemy of fear.</strong> The morning block works because by 6:20 AM you've already been working for an hour. The anxiety about work can't boot up because you're already in motion.</p>
+        <p><strong>Performing recovery perfectly is a Nice Guy pattern.</strong> You plan 10 things, do 6, and feel like a failure. A normal person plans 4, does 3, and feels great. You're not bad at execution. You're bad at scoping.</p>
+      </div>
+    </div>
+
+    <div class="win-block"><p>Three Wim Hof sessions (holds: 64s, 90s, 88s). Waking Up Day 7. Prodigal Son gospel. First cold shower. Full Huberman dopamine episode. Built Foxy mask with Ryan. Deepest emotional processing of the Reset. Identified HSP trait. Second sober night. Did not use despite worst emotional night of the Reset. Paid medical bills. Put Ryan to bed after the blowup.</p></div>
+  </div>
+
+  <!-- DAY 8 -->
+  <div id="day8" class="log clean">
+    <div class="log-title">Day 8 - The Turn</div>
+    <div class="log-date">Sunday, March 8</div>
+    <p><strong>Morning:</strong> Wim Hof 4 rounds (48s to 88s, longest hold 1:28). Waking Up Intro Course Lesson 8 (chest tightness during meditation - withdrawal + emotional armor + surgical posture). Church instead of Hallow.</p>
+    <p><strong>Talked to Ryan.</strong> Sat with him. Said: "Last night was not okay. I was wrong. It was not your fault." He teared up. Reacted most to "it's not your fault" - he'd been carrying it. A 10-year-old boy just learned that his father can lose control, own it, and show up the next morning to say he's getting help. That's the generational pattern breaking right there.</p>
+    <p><strong>Sent two therapist intake emails.</strong> Matthew Checinski (Little Silver, men's issues specialist) and ICCC/David Burnham (Eatontown, substance abuse and anger, Horizon in-network). The most important action of the entire Reset. A human in the room changes everything.</p>
+    <p><strong>Reached out to two friends.</strong> Great conversation with BFF from high school on Messenger. Seven days of saying "call a friend" - finally did it. Also connected with brother, brother-in-law, Kim's family.</p>
+    <p>Kim still cold but softened slightly as the day went on. She needs time. She's entitled to it. Will tell her about therapy when appointment is booked - action, not performance.</p>
+    <p>Ryan's final basketball game was yesterday. Coach called him the most improved player on the team.</p>
+    <p>Got outside. Weather was great. Todo list lowest in years. Ate light (banana, tea, chicken and rice - withdrawal appetite suppression, Day 3). Minimal panic. No Sunday scaries. Took magnesium. Did not check work email all week.</p>
+    <p><strong>Day 2.5 of withdrawal. Feeling OK. Not great. OK. That's enough.</strong></p>
+
+    <div class="win-block"><p>Wim Hof (1:28 hold). Waking Up Day 8. Church. Talked to Ryan - pattern broken. Two therapist emails sent. Two friends contacted. Family visit. Kim softening. Todo list crushed. Third consecutive sober night. No scaries. Ready for Monday.</p></div>
   </div>
 </section>
 
 <!-- ========================================== -->
-<!-- WEEKEND BATTLE PLAN -->
+<!-- MONDAY RETURN -->
 <!-- ========================================== -->
-<section id="weekend">
-  <div class="section-tag">72-Hour Operation</div>
-  <h2>Weekend Battle Plan</h2>
-  <p class="section-desc">Friday through Sunday. Withdrawal peaks. You come out the other side ready for Monday. No doomscrolling. No news. Axios only if you must.</p>
-
-  <div class="callout red">
-    <p><strong>WITHDRAWAL IS AT MAXIMUM INTENSITY NOW.</strong> THC supply gone as of Friday. No more negotiating with it. You will be emotional, irritable, and quiet. That's pharmacological, not personal. Mag Glycinate is helping the jitters - add 1-2 caps midday if needed. Breathwork is medicine. Double sessions. Physiological sighs on demand. The observer doesn't withdraw. Your body does. Notice the contraction. Don't add to it.</p>
-  </div>
-
-  <!-- FRIDAY -->
-  <div class="card">
-    <div class="card-label red">FRIDAY NIGHT, MARCH 6 - SURVIVE THIS</div>
-    <div class="schedule-row"><div class="schedule-time">NOW</div><div class="schedule-task"><strong>Physiological sighs.</strong> 5 reps. Double inhale nose, long exhale mouth. Right now.</div></div>
-    <div class="schedule-row"><div class="schedule-time">+10m</div><div class="schedule-task"><strong>PT Round 2.</strong> All 6 exercises. Give your body something to do besides panic. Audiobook in ears - Untethered Soul.</div></div>
-    <div class="schedule-row"><div class="schedule-time">+40m</div><div class="schedule-task"><strong>NSDR 20 min</strong> (Huberman). Lie down. Let the nervous system settle. This is not optional tonight.</div></div>
-    <div class="schedule-row"><div class="schedule-time">9:00</div><div class="schedule-task"><strong>Screens off.</strong> No doomscroll. Nothing good happens on your phone after 9 PM.</div></div>
-    <div class="schedule-row"><div class="schedule-time">9:45</div><div class="schedule-task"><strong>PM stack + gratitude.</strong> One thing from today. Even if it's "I didn't use tonight." That counts.</div></div>
-    <div class="schedule-row"><div class="schedule-time">10:15</div><div class="schedule-task"><strong>Lights out.</strong> Box breathing in bed until sleep comes. If the voice screams, let it. You're the observer. It passes.</div></div>
-    <p style="margin-top:16px;font-size:14px;color:var(--amber)"><strong>Everything that didn't happen today moves to Saturday. All of it: Huberman dopamine episode, Untethered Soul catch-up, journal catch-up, friend call, personal items, Claude Code scoping. Saturday is loaded. Tonight you just survive.</strong></p>
-  </div>
-
-  <!-- SATURDAY -->
-  <div class="card">
-    <div class="card-label accent">SATURDAY, MARCH 7 - EVERYTHING DAY</div>
-    <div class="schedule-row"><div class="schedule-time">5:15</div><div class="schedule-task"><strong>Morning block</strong> (4 rounds Wim Hof). Waking Up. Hallow. PT round 1. You survived Friday night. That was the hardest part.</div></div>
-    <div class="schedule-row"><div class="schedule-time">7:00</div><div class="schedule-task">Ryan sendoff (if school). Shower. Breakfast with protein.</div></div>
-    <div class="schedule-row"><div class="schedule-time">8:00</div><div class="schedule-task"><strong>Huberman Lab: "Controlling Your Dopamine"</strong> during ice/prone lying. This is the episode that explains why the loop works. Moved from Friday.</div></div>
-    <div class="schedule-row"><div class="schedule-time">9:30</div><div class="schedule-task"><strong>Untethered Soul catch-up.</strong> Push from Ch 2 to Ch 5-6. The infinite energy chapter is Ch 5. Get there. Bike 20 min during or after.</div></div>
-    <div class="schedule-row"><div class="schedule-time">11:00</div><div class="schedule-task"><strong>MIDDAY WIM HOF (3 rounds).</strong> Withdrawal day 2 without supply. This is medicine.</div></div>
-    <div class="schedule-row"><div class="schedule-time">11:30</div><div class="schedule-task"><strong>Journal catch-up.</strong> You're behind 2+ entries. Prompts: "What pattern keeps repeating?" and "Where am I performing competence instead of living it?"</div></div>
-    <div class="schedule-row"><div class="schedule-time">12:30</div><div class="schedule-task">Lunch. Protein. Water.</div></div>
-    <div class="schedule-row"><div class="schedule-time">1:00</div><div class="schedule-task"><strong>Call one friend.</strong> Six days of saying this. Today. Pick a name. Dial. Be real.</div></div>
-    <div class="schedule-row"><div class="schedule-time">1:30</div><div class="schedule-task">Personal items (bills, email, vacation planning, life admin). 90 min max.</div></div>
-    <div class="schedule-row"><div class="schedule-time">3:00</div><div class="schedule-task"><strong>Claude Code POC: SCOPE + BUILD.</strong> DAX documentation generator. Separate thread. Define "done" then start building.</div></div>
-    <div class="schedule-row"><div class="schedule-time">4:00</div><div class="schedule-task">Kids Time. Extended - it's Saturday. Be fully present.</div></div>
-    <div class="schedule-row"><div class="schedule-time">5:00</div><div class="schedule-task">Claude Code POC continue if needed. Or rest.</div></div>
-    <div class="schedule-row"><div class="schedule-time">6:30</div><div class="schedule-task">Dinner. Journal: "What does Ryan need from me? What about Hailey?"</div></div>
-    <div class="schedule-row"><div class="schedule-time">7:00</div><div class="schedule-task">PT Round 2. Box breathing. PM stack + gratitude. Bed by 10:15.</div></div>
-  </div>
-
-  <!-- SUNDAY -->
-  <div class="card">
-    <div class="card-label purple">SUNDAY, MARCH 8 - ARMOR DAY</div>
-    <div class="schedule-row"><div class="schedule-time">5:15</div><div class="schedule-task"><strong>Morning block</strong> (4 rounds Wim Hof). Extra breathwork. This is the Sunday scaries battleground. You know what's coming. Breathe through it.</div></div>
-    <div class="schedule-row"><div class="schedule-time">8:00</div><div class="schedule-task">Breakfast with family. Be present. Not in your head about Monday.</div></div>
-    <div class="schedule-row"><div class="schedule-time">9:00</div><div class="schedule-task"><strong>Kim conversation.</strong> Not a performance. Not a confession designed to earn credit. Truth: what happened, how you checked out, what you're doing. Then close your mouth and listen.</div></div>
-    <div class="schedule-row"><div class="schedule-time">10:30</div><div class="schedule-task"><strong>MIDDAY WIM HOF.</strong> Process whatever came up with Kim.</div></div>
-    <div class="schedule-row"><div class="schedule-time">11:00</div><div class="schedule-task"><strong>Sunil 1:1 prep.</strong> What do you want to say? What don't you say? What's your ask? What boundaries are you setting for return? Write it down. Separate thread with Claude.</div></div>
-    <div class="schedule-row"><div class="schedule-time">12:30</div><div class="schedule-task">Lunch. Claude Code POC polish/final. Get it demo-ready.</div></div>
-    <div class="schedule-row"><div class="schedule-time">2:00</div><div class="schedule-task"><strong>Monday prep.</strong> Lay out clothes. Pack bag. Plan commute. Pre-write first 2 hours of Monday so you don't walk in reactive.</div></div>
-    <div class="schedule-row"><div class="schedule-time">3:00</div><div class="schedule-task">Untethered Soul. Rest. No screens. No news.</div></div>
-    <div class="schedule-row"><div class="schedule-time">4:00</div><div class="schedule-task">Kids Time.</div></div>
-    <div class="schedule-row"><div class="schedule-time">6:30</div><div class="schedule-task">Dinner. Journal: <strong>"What am I walking into tomorrow and what's my plan?"</strong></div></div>
-    <div class="schedule-row"><div class="schedule-time">7:00</div><div class="schedule-task">PT Round 2. Extra box breathing tonight (10 min). PM stack. <strong>Lights out 9:30.</strong> Early bed. Monday comes fast.</div></div>
-  </div>
+<section id="monday">
+  <div class="section-tag">Return to the Grind</div>
+  <h2>Monday, March 9</h2>
+  <p class="section-desc">Day 9 of the Reset. Day 3 of withdrawal. First day back at JMFS. You walk in grounded. You walk in different.</p>
 
   <div class="callout green">
-    <p><strong>MONDAY, MARCH 9.</strong> 5:15 block is your armor. You walk in grounded. Morning block done before you leave the house. You've shipped a Claude Code POC over the weekend. You have a plan for the Sunil conversation. You are not the man who left. You are the man who came back with boundaries.</p>
+    <p><strong>WITHDRAWAL STATUS:</strong> Day 3 without THC. Past the worst physical symptoms (Friday-Saturday). Appetite returning slowly. Jitters decreasing. Irritability still present but manageable. Continue Mag Glycinate midday. Breathwork before any high-stress interaction. The wave is passing.</p>
+  </div>
+
+  <!-- MORNING BLOCK -->
+  <div class="card">
+    <div class="card-label green">5:15 AM - MORNING BLOCK (NON-NEGOTIABLE)</div>
+    <div class="schedule-row"><div class="schedule-time">5:15</div><div class="schedule-task"><strong>Wim Hof 4 rounds.</strong> This is your armor. By 5:30 you've already done more for yourself than most people do all day.</div></div>
+    <div class="schedule-row"><div class="schedule-time">5:35</div><div class="schedule-task"><strong>Waking Up Day 9.</strong> 10 minutes. The observer goes to work today. The narrator stays home.</div></div>
+    <div class="schedule-row"><div class="schedule-time">5:50</div><div class="schedule-task"><strong>Hallow.</strong> Gospel + daily meditation.</div></div>
+    <div class="schedule-row"><div class="schedule-time">6:00</div><div class="schedule-task"><strong>Triage email.</strong> Lying down. Scan for fires only. Do not respond to anything that isn't on fire. Make a short list of what needs attention first. Close email.</div></div>
+    <div class="schedule-row"><div class="schedule-time">6:20</div><div class="schedule-task">Shower (cold finish 15-30 seconds). AM stack with breakfast. Get dressed.</div></div>
+  </div>
+
+  <!-- FIRST TWO HOURS -->
+  <div class="card">
+    <div class="card-label accent">FIRST TWO HOURS AT WORK</div>
+    <div class="schedule-row"><div class="schedule-time">ARRIVE</div><div class="schedule-task"><strong>Do not open Slack or Teams first.</strong> Open your task list. Work your list, not everyone else's inbox.</div></div>
+    <div class="schedule-row"><div class="schedule-time">+15m</div><div class="schedule-task"><strong>Triage tickets.</strong> Scan, categorize, flag. Do not solve anything yet. Just sort.</div></div>
+    <div class="schedule-row"><div class="schedule-time">+30m</div><div class="schedule-task"><strong>First real work block.</strong> Pick the highest-priority item from YOUR list. Not the loudest request. Not the most urgent Slack ping. Your priority. Work it for 60-90 minutes uninterrupted.</div></div>
+    <div class="schedule-row"><div class="schedule-time">+2h</div><div class="schedule-task"><strong>Then check messages.</strong> Respond to what needs responding. Redirect what isn't yours. "Let me check on that" buys you time without committing.</div></div>
+  </div>
+
+  <!-- THERAPIST CALLS -->
+  <div class="card">
+    <div class="card-label purple">8:30 AM - THERAPIST CALLS</div>
+    <p><strong>Call 1:</strong> Matthew Checinski, LPC - Little Silver. (732) 605-6876. Men's issues specialist. Ask about Horizon BCBS and EAP. Email already sent.</p>
+    <p><strong>Call 2:</strong> ICCC / David Burnham, LPC - Eatontown. (732) 389-0697. Horizon in-network confirmed. Substance abuse + anger + men's issues. Email already sent.</p>
+    <p><strong>Also:</strong> Call HR about Jersey Mike's EAP. Ask: "Does our EAP allow me to choose my own therapist? How many sessions are covered?"</p>
+  </div>
+
+  <!-- PT -->
+  <div class="card">
+    <div class="card-label amber">12:00 PM - PT AT OASIS</div>
+    <p>Noon session. <strong>REPORT THE NUMBNESS/TINGLING.</strong> Big toe, knee, lower thigh. You've been carrying this for a week. Tell them today.</p>
+    <p>Ask about progression: prone lying duration, bike resistance increase, any new exercises.</p>
+  </div>
+
+  <!-- SUNIL -->
+  <div class="card">
+    <div class="card-label red">SUNIL 1:1 (when scheduled)</div>
+    <p><strong>Prep separately.</strong> This is not a confession. This is not "I'm sorry I was gone." This is a professional returning from medical leave with a plan.</p>
+    <p>Come with: what you accomplished during leave (Reporting Hub monitoring, protocol work), what you need to succeed this week, and one boundary you're setting.</p>
+    <p>Do not volunteer for new work in this meeting. Listen. Ask questions. Take notes. Commit to nothing beyond what's already on your plate.</p>
+  </div>
+
+  <!-- EVENING -->
+  <div class="card">
+    <div class="card-label green">EVENING - PROTECT THE LANDING</div>
+    <div class="schedule-row"><div class="schedule-time">5:30</div><div class="schedule-task"><strong>Work stops.</strong> Close laptop. You are home now.</div></div>
+    <div class="schedule-row"><div class="schedule-time">6:00</div><div class="schedule-task">Dinner. Protein. Be at the table with the family.</div></div>
+    <div class="schedule-row"><div class="schedule-time">7:00</div><div class="schedule-task">PT exercises. Bike 20 min if energy allows.</div></div>
+    <div class="schedule-row"><div class="schedule-time">8:00</div><div class="schedule-task">Kids. Be present. Ryan built a Foxy mask with you two days ago. That's the currency.</div></div>
+    <div class="schedule-row"><div class="schedule-time">9:00</div><div class="schedule-task"><strong>Screens off.</strong> PM stack. Box breathing.</div></div>
+    <div class="schedule-row"><div class="schedule-time">9:30</div><div class="schedule-task"><strong>Lights out.</strong> You survived Day 1 back. That's all you needed to do.</div></div>
+  </div>
+
+  <div class="callout amber">
+    <p><strong>RULES FOR WEEK ONE:</strong> No volunteering for new work. No staying past 5:30. No checking email after dinner. No solving other people's problems. One boundary set. Morning block every day. PT Monday and Thursday at noon. You are in recovery from surgery and withdrawal simultaneously. Pace accordingly.</p>
   </div>
 </section>
 
@@ -972,13 +1089,14 @@ footer {
 
   <div class="card">
     <div class="card-label green">AM STACK (7:30 with food)</div>
-    <p>Tyrosine x2, Arg/Cit x4, Lung Health x2, Sigma x4, One A Day x1, Omega-3 x1. Aspirin 325mg. Colace.</p>
+    <p>Tyrosine x2 <strong>(work days only - cycle off weekends per Huberman)</strong>, Arg/Cit x4, Lung Health x2, Sigma x4, One A Day x1, Omega-3 x1, <strong>Vitamin D3 5000 IU (new - supports dopamine synthesis via tyrosine hydroxylase)</strong>. Aspirin 325mg. Colace.</p>
   </div>
 
   <div class="card">
     <div class="card-label purple">PM STACK (9:45)</div>
     <p>Theanine x4, Mag Glycinate x4, Multi Collagen x3, Glucosamine x3. Aspirin 325mg. Colace.</p>
     <p><strong>Withdrawal support:</strong> Mag Glycinate 1-2 caps midday for jitters. Natural GABA agonist - calms the pathways THC was sedating.</p>
+    <p><strong>Dopamine recovery additions:</strong> Cold shower end (10-60 seconds, building). One serving fermented food daily (sauerkraut, kimchi, yogurt - 50% of dopamine produced in gut). Consider yerba mate tea bags as tea replacement (Cruz de Malta or Taragui, $8-10 for 50-pack - increases dopamine receptor density, not just dopamine levels).</p>
   </div>
 
   <div class="card">
@@ -1049,10 +1167,11 @@ footer {
   <p class="section-desc">Not someday. This year. You have a great career. AI doesn't destroy you - it amplifies you. You become the architect who tells the AI what to do.</p>
 
   <div class="timeline-item now">
-    <div class="timeline-label">THIS WEEK (March 5-8)</div>
-    <p><strong>Reach out to a friend and get real.</strong> You've said this since Day 2. The longer you wait, the more shame uses the delay as evidence. Pick one name. Call Friday.</p>
-    <p><strong>Weekend battle plan.</strong> Content catch-up. Journal catch-up. Claude Code POC. Kim conversation. Sunil prep. Walk into Monday grounded.</p>
-    <p><strong>No doomscrolling. No news spiral.</strong> Axios only. Nothing on that screen in Tehran changes anything in Tinton Falls. Your kids need you present, not informed.</p>
+    <div class="timeline-label">THIS WEEK (March 9-14)</div>
+    <p><strong>Therapist intake.</strong> Two emails sent Sunday. Follow up with calls Monday 8:30 AM. Matthew Checinski (Little Silver) and David Burnham at ICCC (Eatontown). Goal: first session this week.</p>
+    <p><strong>Return to work Monday.</strong> Morning block is armor. Triage email at 6 AM. First two hours: your priorities, not everyone else's. PT at noon. Sunil 1:1. One boundary set.</p>
+    <p><strong>Friend outreach done.</strong> Connected with BFF from high school. Keep the line open.</p>
+    <p><strong>Post-op with Dr. Buckley Friday March 13.</strong> Report numbness/tingling. Get clearance update.</p>
   </div>
 
   <div class="timeline-item now">
@@ -1060,14 +1179,14 @@ footer {
     <p><strong>Walk in as the architect, not the firefighter.</strong> You're a principal data engineer with a billion-row warehouse, Power BI at enterprise scale, and Entra External ID for 5,000 franchisees. That's not a role AI replaces. That's a role AI supercharges.</p>
     <p><strong>Sunil 1:1:</strong> Separate thread. Come with a plan, not a plea.</p>
     <p><strong>Set one boundary in week one.</strong> A ticket you redirect. A meeting you decline. Start small.</p>
-    <p><strong>Claude Code POC in your back pocket.</strong> You built something over the weekend while recovering from surgery. That's not a guy coming back diminished. That's a guy who came back sharper.</p>
+    <p><strong>You didn't build the Claude Code POC this weekend.</strong> You built something more important: you talked to your son, sent therapist emails, reached out to friends, went to church, and held sobriety through the worst 72 hours of the Reset. The POC moves to Week 2. What you did this weekend matters more.</p>
   </div>
 
   <div class="timeline-item q2">
     <div class="timeline-label">APRIL - MAY</div>
     <p><strong>Hernia surgery May 1.</strong> You'll be stronger going in. Hip recovery well underway.</p>
     <p><strong>PT progression.</strong> Bike (cleared). Walking without crutches. Foundation Training. Morning block evolves: outdoor walk, cycling, sweat before shower. The slot is built.</p>
-    <p><strong>Therapy or support group.</strong> Evaluate whether professional support accelerates the work. Not weakness. Force multiplier.</p>
+    <p><strong>Therapy in progress.</strong> Individual sessions underway. Evaluate couples therapy with Kim when individual work has stabilized. Dr. Alan Zwerdling (Red Bank, EFT certified) for couples when ready.</p>
     <p><strong>AI integration roadmap for JMFS.</strong> Copilot in Power BI, LLM-assisted SQL, AI-augmented data quality. You're not reacting to the wave. You're steering it.</p>
   </div>
 
@@ -1140,6 +1259,22 @@ footer {
 <button class="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
 
 <script>
+
+function tryUnlock() {
+  var input = document.getElementById('lockInput');
+  if (input.value.toLowerCase() === 'self') {
+    document.getElementById('lockScreen').classList.add('unlocked');
+    setTimeout(function() { document.getElementById('lockScreen').style.display = 'none'; }, 500);
+  } else {
+    document.getElementById('lockError').classList.add('visible');
+    input.value = '';
+    setTimeout(function() { document.getElementById('lockError').classList.remove('visible'); }, 1500);
+  }
+}
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('lockInput').focus();
+});
+
 function go(e, id) {
   e.preventDefault();
   var el = document.getElementById(id);
